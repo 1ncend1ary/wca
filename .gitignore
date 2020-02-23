@@ -1,7 +1,2 @@
 venv
 .idea
-lib/*
-bin/*
-web/media/*
-/**/__pycache__
-/**/migrations
