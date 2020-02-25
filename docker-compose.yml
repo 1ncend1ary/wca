@@ -1,0 +1,34 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+  redis:
+    image: "redis:alpine"
+    # rockmongo:
+    #   image: "cosmostail/dockercloud-rockmongo:latest"
+    #   links:
+    #     - db:mongodb-host
+    #   restart: always
+    #   ports:
+    #     - "80:80"
+    #   environment:
+    #     - 'MONGO_CONF=[{"mongo_name":"WWA DB","mongo_host":"wwa-db","mongo_port":"27017","mongo_auth":"true"}]'
+
+  # db:
+  #   image: mongo
+  #   ports:
+  #     - '27017-27019:27017-27019'
+  #   environment:
+  #     MONGO_INITDB_DATABASE: 'wwa-db'
+  #     MONGO_INITDB_ROOT_USERNAME: 'root'
+  #     MONGO_INITDB_ROOT_PASSWORD: '19390202'
+  #   volumes:
+  #     - test-db:/data/db
+  #     - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
+  #   restart: always
