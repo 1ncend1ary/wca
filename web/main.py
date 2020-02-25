@@ -1,9 +1,11 @@
 from flask import Flask, render_template
 import time
 import redis
+import database
 
 app = Flask(__name__)
 cache = redis.Redis(host='redis', port=6379)
+
 
 def get_hit_count():
     retries = 5
@@ -16,14 +18,18 @@ def get_hit_count():
             retries -= 1
             time.sleep(0.5)
 
+
 @app.route("/")
 def index():
     count = get_hit_count()
-    return render_template("index.html", count=count)
+    element = database.fetch_new_entry()
+    return render_template("index.html", word=element['Word'], image=element["URL"])
+
 
 @app.route("/contacts")
 def contacts():
     return render_template("contacts.html")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
