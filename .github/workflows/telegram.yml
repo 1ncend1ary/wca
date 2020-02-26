@@ -12,4 +12,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        args: The ${{ github.event_name }} event triggered first step.
+        args: User ${{ github.GITHUB_ACTOR }} triggered the ${{ github.EVENT_NAME }} event in ${{ github.GITHUB_REPOSITORY }}. [Action id ${{ github.GITHUB_ACTION }}]
