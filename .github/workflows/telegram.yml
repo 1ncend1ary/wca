@@ -1,16 +1,37 @@
-name: Notify
+ame: Build and Notify
 on:
   push:
-  release:
-    types: [published]
-
+  pull_request:
+    types: [opened,closed]
+  issues:
+    types: [opened, closed, reopened]
+  issue_comment:
+    types: [created]
+  watch:
+    types: [started]
 jobs:
-  notify:
-    name: Notify via Telegram
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Telegram
-        uses: Lukasss93/telegram-action@v1
-        env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT: ${{ secrets.TELEGRAM_TO }}
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+      id: go
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v1
+
+    - name: Build
+      run: go build -v .
+      
+    - name: Statusoli
+      uses: athul/statusoli@master
+      if: always()
+      with:
+        chat: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        status: ${{ job.status }}
