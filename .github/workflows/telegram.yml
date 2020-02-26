@@ -1,37 +1,15 @@
-name: Build and Notify
-on:
-  push:
-  pull_request:
-    types: [opened,closed]
-  issues:
-    types: [opened, closed, reopened]
-  issue_comment:
-    types: [created]
-  watch:
-    types: [started]
+name: telegram message
+on: [push]
 jobs:
 
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-
-    - name: Set up Go 1.13
-      uses: actions/setup-go@v1
+    - uses: actions/checkout@master
+    - name: send custom message with args
+      uses: appleboy/telegram-action@master
       with:
-        go-version: 1.13
-      id: go
-
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v1
-
-    - name: Build
-      run: go build -v .
-      
-    - name: Statusoli
-      uses: athul/statusoli@master
-      if: always()
-      with:
-        chat: ${{ secrets.TELEGRAM_TO }}
+        to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        status: ${{ job.status }}
+        args: User ${{ github.actor }} triggered the ${{ github.event_name }} event in ${{ github.repository }}. [Action is ${{ github.action }}]
