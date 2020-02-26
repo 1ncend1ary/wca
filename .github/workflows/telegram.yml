@@ -12,4 +12,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        args: User ${{ github.GITHUB_ACTOR }} triggered the ${{ github.EVENT_NAME }} event in ${{ github.GITHUB_REPOSITORY }}. [Action id ${{ github.GITHUB_ACTION }}]
+        args: User ${{ github.github_actor }} triggered the ${{ github.event_name }} event in ${{ github.github_repository }}. [Action id ${{ github.github_action }}]
