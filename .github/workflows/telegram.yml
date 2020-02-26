@@ -12,4 +12,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        args: User ${{ github.actor }} triggered the ${{ github.event_name }} event in ${{ github.repository }}. [Action is ${{ github.action }}]
+        args: User ${{ github.actor }} triggered the ${{ github.event_name }} event in ${{ github.repository }}. [Link is https://github.com/1ncend1ary/wca/actions/runs/${{ github.run_id }}]
