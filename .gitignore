@@ -2,4 +2,4 @@ venv
 .idea
 .DS_store
 __pycache__
-secret.py
+web/secret.py
