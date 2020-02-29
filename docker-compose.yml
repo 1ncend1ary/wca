@@ -1,34 +1,61 @@
-version: '3'
+version: '3.7'
 services:
+  # redis:
+  #   image: "redis:alpine"
+
   web:
-    build: .
+    build: web/
     ports:
-      - "5000:5000"
+      - "8080:5000"
+    depends_on:
+      - mongo
     volumes:
-      - .:/code
+      - ./web:/app/web
+      - ./secrets/secret.py:/app/web/secret.py
     environment:
       FLASK_ENV: development
-  redis:
-    image: "redis:alpine"
-    # rockmongo:
-    #   image: "cosmostail/dockercloud-rockmongo:latest"
-    #   links:
-    #     - db:mongodb-host
-    #   restart: always
-    #   ports:
-    #     - "80:80"
-    #   environment:
-    #     - 'MONGO_CONF=[{"mongo_name":"WWA DB","mongo_host":"wwa-db","mongo_port":"27017","mongo_auth":"true"}]'
 
-  # db:
-  #   image: mongo
-  #   ports:
-  #     - '27017-27019:27017-27019'
-  #   environment:
-  #     MONGO_INITDB_DATABASE: 'wwa-db'
-  #     MONGO_INITDB_ROOT_USERNAME: 'root'
-  #     MONGO_INITDB_ROOT_PASSWORD: '19390202'
-  #   volumes:
-  #     - test-db:/data/db
-  #     - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
-  #   restart: always
+  mongo:
+    image: mongo:latest
+    restart: always
+    env_file:
+      - secrets/db.env
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+  mongo-seed:
+    build:
+      context: ./mongo-seed
+    env_file:
+      - secrets/db.env
+    depends_on:
+      - mongo
+    restart: on-failure
+    links:
+      - mongo
+
+  mongo_web:
+    image: mongo-express
+    ports:
+      - "19981:8081"
+    restart: on-failure
+    env_file:
+      - secrets/db_web.env
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+
+volumes:
+  mongodb_data:
+    driver: local
+
+
+# secrets:
+#   mongodb_root_username:
+#     file: ./secrets/.mongodb_root_username
+#   mongodb_root_password:
+#     file: ./secrets/.mongodb_root_password
