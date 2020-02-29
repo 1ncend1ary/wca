@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    #count = get_hit_count()
+    # count = get_hit_count()
     element = database.fetch_new_entry()
     return render_template("index.html", word=element['category name'], image=None)
 
