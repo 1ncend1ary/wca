@@ -2,145 +2,76 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>Web Words Annotator</title>
+    <title>Web Categories Annotator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/buttons.css">
     <link rel="stylesheet" href="../static/css/template.css">
     <link rel="stylesheet" href="../static/css/checkboxes.css">
+    <link rel="shortcut icon" href="">
 </head>
 <body>
-<header>
-    <div class="container">
-        <h1 class="title overflow">Web Words Annotator</h1>
-    </div>
-</header>
+{% extends "template.html" %}
+{% block content %}
 
-<main>
-    <div class="container">
-        <div class="left col-lg-8 col-md-8  col-sm-12">
-            <div class="subtitle-box">
-                <h2 class="category-name overflow">Mango</h2>
-                <button class="btn-green btn-refresh" onClick="window.location.reload();">
-                    <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt="reload">
-                </button>
-            </div>
-            <div class="scrollable">
-                <div class="line">
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..." src="http://farm1.static.flickr.com/10/14408672_de11545035.jpg">
-                    </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..." src="https://farm1.static.flickr.com/72/178703477_81b2af55b9.jpg">
-                    </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="https://farm3.static.flickr.com/2260/2448903177_58e6bfd9f2.jpg">
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="https://farm4.static.flickr.com/3022/2376756888_fca922a693.jpg">
-                    </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="http://farm4.static.flickr.com/3091/2284118423_5fc50d7753_o.jpg">
-                    </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="http://www.fruitsandveggiesmorematters.org/wp-content/uploads/UserFiles/Image/cooking/good/nutrition/fvdb/mango.jpg">
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="http://farm3.static.flickr.com/2166/2169138228_64c497340d.jpg">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="right col-lg-4 col-md-4  col-sm-12">
-            <div class="subtitle-box">
-                <h2 class="overflow">Categories</h2>
-            </div>
-            <div class="checkbox-list scrollable">
-                <label class="checkbox-container">One
-                    <input type="checkbox" checked="checked">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-            </div>
-            <div class="buttons">
-                <button class="btn-green">Confirm</button>
-            </div>
-        </div>
-    </div>
-</main>
+    <main>
+        <div class="container">
+            <div class="left col-lg-8 col-md-8  col-sm-12">
+                <div class="subtitle-box">
+                    {% for word in words %}
+                        <h2 class="category-name overflow"> {{ word }} </h2>
+                    {% endfor %}
 
-<footer>
-    <div class="text-center">
-        <a class="git" href="https://github.com/1ncend1ary/wca">git project</a>
-    </div>
-</footer>
+                    <button class="btn-green btn-refresh" onClick="window.location.reload();">
+                        <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt="reload">
+                    </button>
+                </div>
+                <div class="scrollable">
+                    {% for v in images %}
+                        <div class="line">
+                            <div class="square-4 text-white">
+                                <img class="image" src="{{ v }}" alt="Image"/>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {#                    <div class="line">#}
+                    {#                        <div class="square-4 text-white">#}
+                    {#                            <img class="image" src="{{ image }}" alt="Image"/>#}
+                    {#                        </div>#}
+                    {#                        <div class="square-4 text-white">#}
+                    {#                            <img class="image" alt="..."#}
+                    {#                                 src="https://farm1.static.flickr.com/72/178703477_81b2af55b9.jpg">#}
+                    {#                        </div>#}
+                    {#                        <div class="square-4 text-white">#}
+                    {#                            <img class="image" alt="..."#}
+                    {#                                 src="https://farm3.static.flickr.com/2260/2448903177_58e6bfd9f2.jpg">#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                </div>
+            </div>
+            <form>
+                <div class="right col-lg-4 col-md-4  col-sm-12">
+                    <div class="subtitle-box">
+                        <h2 class="overflow">Categories</h2>
+                    </div>
+                    <div class="checkbox-list scrollable">
+                        {% for category in categories %}
+                            <label class="checkbox-container">{{ category }}
+                                <input name="checkbox" type="checkbox" checked="checked">
+                                <span class="check-mark"></span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-green" type="submit" formmethod="post">Confirm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+{% endblock %}
 
 
 </body>

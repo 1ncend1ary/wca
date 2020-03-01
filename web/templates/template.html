@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
- <head>
-   <meta charset="utf-8">
-   <title>WWA</title>
-   <link rel="stylesheet" href="{{ url_for('static',     filename='css/template.css') }}">
- </head>
- <body>
-    <header>
-      <div class="container">
-        <h1 class="logo">Web Words Annotator</h1>
-        <strong><nav>
-          <ul class="menu">
-            <li><a href="{{ url_for('index') }}">Index</a></li>
-            <li><a href="{{ url_for('contacts') }}">Contacts</a></li>
-          </ul>
-        </nav></strong>
-      </div>
-    </header>
+<head>
+    <meta charset="utf-8">
+    <title>Web Categories Annotator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/buttons.css">
+    <link rel="stylesheet" href="../static/css/template.css">
+    <link rel="stylesheet" href="../static/css/checkboxes.css">
+    <link rel="shortcut icon" href="">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1 class="title overflow">Web Categories Annotator</h1>
+    </div>
 
-    {% block content %}
-    {% endblock %}
+    <strong>
+        <nav>
+            <ul class="menu">
+                <li><a href="{{ url_for('index') }}">Index</a></li>
+                <li><a href="{{ url_for('contacts') }}">Contacts</a></li>
+            </ul>
+        </nav>
+    </strong>
+</header>
 
- </body>
+{% block content %}
+{% endblock %}
+
+
+<footer>
+    <div class="text-center">
+        <a class="git" href="https://github.com/1ncend1ary/wca">git project</a>
+    </div>
+</footer>
+
+</body>
 </html>

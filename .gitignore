@@ -7,4 +7,5 @@ secrets/*
 secrets*
 mongo-gui
 database
+*.log
 
