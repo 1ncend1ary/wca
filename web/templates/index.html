@@ -9,17 +9,20 @@
     <link rel="stylesheet" href="../static/css/checkboxes.css">
     <link rel="shortcut icon" href="">
 </head>
-<body>
+<body style="background-color:#BFE2CA;">
 {% extends "template.html" %}
 {% block content %}
 
     <main>
         <div class="container">
             <div class="left col-lg-8 col-md-8  col-sm-12">
-                <div class="subtitle-box">
-                    {% for word in words %}
-                        <h2 class="category-name overflow"> {{ word }} </h2>
-                    {% endfor %}
+                <div class="subtitle-box" style="display:flex; flex-wrap:wrap; height: max-content">
+                    <h2 class="category-name" style="display:flex; flex-wrap:wrap">
+                        {% for word in words %}
+                            {{ word }}
+                            <br/>
+                        {% endfor %}
+                    </h2>
 
                     <button class="btn-green btn-refresh" onClick="window.location.reload();">
                         <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt="reload">
@@ -27,11 +30,13 @@
                 </div>
                 <div class="scrollable">
                     {% for v in images %}
-                        <div class="line">
-                            <div class="square-4 text-white">
-                                <img class="image" src="{{ v }}" alt="Image"/>
-                            </div>
-                        </div>
+{#                        <div class="line">#}
+                            {% for qq in v %}
+{#                                <div class="square-4 text-white">#}
+                                    <img class="image" src="{{ qq }}" alt="Image" onerror="this.style.display='none'"/>
+{#                                </div>#}
+                            {% endfor %}
+{#                        </div>#}
                     {% endfor %}
 
                     {#                    <div class="line">#}
@@ -49,7 +54,7 @@
                     {#                    </div>#}
                 </div>
             </div>
-            <form>
+            <form method="POST" action="/">
                 <div class="right col-lg-4 col-md-4  col-sm-12">
                     <div class="subtitle-box">
                         <h2 class="overflow">Categories</h2>
@@ -57,14 +62,15 @@
                     <div class="checkbox-list scrollable">
                         {% for category in categories %}
                             <label class="checkbox-container">{{ category }}
-                                <input name="checkbox" type="checkbox" checked="checked">
+                                <input name="checkbox" type="checkbox" value="{{ category }}">
                                 <span class="check-mark"></span>
                             </label>
                         {% endfor %}
                     </div>
-                    <div class="buttons">
-                        <button class="btn-green" type="submit" formmethod="post">Confirm</button>
-                    </div>
+                <input type="submit">
+{#                    <div class="buttons">#}
+{#                        <button class="btn-green" type="submit" formmethod="post">Confirm</button>#}
+{#                    </div>#}
                 </div>
             </form>
         </div>
