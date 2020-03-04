@@ -3,3 +3,4 @@ redis
 pymongo
 dnspython
 requests
+flask_wtf
