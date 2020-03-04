@@ -31,11 +31,11 @@
                 <div class="scrollable">
                     {% for v in images %}
 {#                        <div class="line">#}
-                            {% for qq in v %}
-{#                                <div class="square-4 text-white">#}
-                                    <img class="image" src="{{ qq }}" alt="Image" onerror="this.style.display='none'"/>
-{#                                </div>#}
-                            {% endfor %}
+{#                            {% for qq in v %}#}
+                                <div class="square-4 text-white">
+                                    <img class="image" src="{{ v }}" alt="Image" onerror="this.style.display='none'; this.parentNode.style.display='none'"/>
+                                </div>
+{#                            {% endfor %}#}
 {#                        </div>#}
                     {% endfor %}
 

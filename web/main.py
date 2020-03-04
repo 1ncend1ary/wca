@@ -81,7 +81,7 @@ def index():
     # images = list(compress(images, booleans))
     # print('Filter images:', time.time() - start, file=sys.stdout, flush=True)
 
-    images = [images[i: i + 3] for i in range(0, len(images), 3)]
+    # images = [images[i: i + 3] for i in range(0, len(images), 3)]
     return render_template("index.html", words=category_names, images=images, categories=set(categories[:10]))
 
 
