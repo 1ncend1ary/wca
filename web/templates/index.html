@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../static/css/buttons.css">
     <link rel="stylesheet" href="../static/css/template.css">
     <link rel="stylesheet" href="../static/css/checkboxes.css">
-    <link rel="shortcut icon" href="">
+    <link rel="shortcut icon" href="../static/favicon.ico" type='image/x-icon'>
 </head>
 <body style="background-color:#BFE2CA;">
 {% extends "template.html" %}
@@ -32,8 +32,11 @@
                     {% for v in images %}
 {#                        <div class="line">#}
 {#                            {% for qq in v %}#}
-                                <div class="square-4 text-white">
-                                    <img class="image" src="{{ v }}" alt="Image" onerror="this.style.display='none'; this.parentNode.style.display='none'"/>
+                                <div class="square-4 text-white" style="display: none">
+                                    <img class="image" src="{{ v }}" alt="Image"
+                                         style="display: none"
+                                         onload="this.style.display='initial'; this.parentNode.style.display='initial'"
+                                         onerror="this.style.display='none'; this.parentNode.style.display='none'"/>
                                 </div>
 {#                            {% endfor %}#}
 {#                        </div>#}
