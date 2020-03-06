@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Web Categories Annotator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/buttons.css">
-    <link rel="stylesheet" href="../static/css/template.css">
-    <link rel="stylesheet" href="../static/css/checkboxes.css">
-</head>
 <body>
 <header>
     <div class="container">
-        <h1 class="title overflow">Web Categories Annotator</h1>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <h1 class="title overflow" id="fixedHeader">Web Categories Annotator</h1>
+        </div>
+
     </div>
 
 {#    <strong>#}
@@ -23,7 +16,7 @@
 {#        </nav>#}
 {#    </strong>#}
 </header>
-<hr>
+<!--<hr>-->
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul>
@@ -36,6 +29,21 @@
 
 {% block content %}
 {% endblock %}
+
+<!--<script type="text/javascript">-->
+<!--    window.onscroll = function() {myFunction()};-->
+
+<!--    var header = document.getElementById("fixedHeader");-->
+<!--    var sticky = header.offsetTop;-->
+
+<!--    function myFunction() {-->
+<!--        if (window.pageYOffset > sticky) {-->
+<!--            header.classList.add("sticky");-->
+<!--        } else {-->
+<!--            header.classList.remove("sticky");-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 
 
 <footer>

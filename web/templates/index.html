@@ -7,25 +7,25 @@
     <link rel="stylesheet" href="../static/css/buttons.css">
     <link rel="stylesheet" href="../static/css/template.css">
     <link rel="stylesheet" href="../static/css/checkboxes.css">
-    <link rel="shortcut icon" href="../static/favicon.ico" type='image/x-icon'>
+    <link rel="shortcut icon" href="../static/favicon.ico">
 </head>
 <body style="background-color:#BFE2CA;">
 {% extends "template.html" %}
 {% block content %}
 
     <main>
+
         <div class="container">
             <div class="left col-lg-8 col-md-8  col-sm-12">
-                <div class="subtitle-box" style="display:flex; flex-wrap:wrap; height: max-content">
-                    <h2 class="category-name" style="display:flex; flex-wrap:wrap">
+                <div class="subtitle-box">
+                    <h2 class="category-name">
                         {% for word in words %}
-                            {{ word }}
-                            <br/>
+                        {{ word }}
+                        <br/>
                         {% endfor %}
                     </h2>
-
                     <button class="btn-green btn-refresh" onClick="window.location.reload();">
-                        <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt="reload">
+                        <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt=".">
                     </button>
                 </div>
                 <div class="scrollable">
@@ -61,8 +61,11 @@
             <form method="POST" action="/">
                 <input name="category_id" value="{{ category_id }}" type="hidden" />
                 <div class="right col-lg-4 col-md-4  col-sm-12">
-                    <div class="subtitle-box">
-                        <h2 class="overflow">Categories</h2>
+                    <div class="subtitle-box" >
+                        <h2 class="overflow">
+                            Categories
+                            <br/>
+                        </h2>
                     </div>
                     <div class="checkbox-list scrollable">
                         {% for category in categories %}

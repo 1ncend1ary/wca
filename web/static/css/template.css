@@ -1,3 +1,8 @@
+:root {
+    --main-bg-color: #0D122B;
+    --footer-border-color: rgba(0, 0, 0, 0.25);
+    --gradient-color: rgba(13, 18, 43, 0.2);
+}
 
 html {
     overflow: auto;
@@ -5,48 +10,49 @@ html {
 
 body {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
-    white-space: nowrap;
+    white-space: nowrap; /* remove this */
     overflow: hidden;
 }
 
 footer {
-    border-top: 1px solid rgba(0, 1, 0, 0.25);
-    margin: 4rem auto auto;
+    border-top: 1px solid var(--footer-border-color);
+    margin: auto;
     padding: 2rem;
 }
 
 .scrollable {
-  max-height: 65rem;
-  overflow: auto;
+    max-height: 65rem;
+    overflow: auto;
 }
 
 .overflow {
-  white-space: nowrap;
-  overflow: hidden;
-  position: relative;
-  background: #0D122B;
+    position: relative;
+    background: var(--main-bg-color);
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .overflow::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 1.8em;
-  height: 100%;
-  background: -moz-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: -webkit-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: -o-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: -ms-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: linear-gradient(to right, rgba(13, 18, 43, 0.2), #0D122B 100%);
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.8em;
+    height: 100%;
+    background: -moz-linear-gradient(left, var(--gradient-color), var(--main-bg-color) 100%);
+    background: -webkit-linear-gradient(left, var(--gradient-color), var(--main-bg-color) 100%);
+    background: -o-linear-gradient(left, var(--gradient-color), var(--main-bg-color) 100%);
+    background: -ms-linear-gradient(left, var(--gradient-color), var(--main-bg-color) 100%);
+    background: linear-gradient(to right, var(--gradient-color), var(--main-bg-color) 100%);
 }
 
 .title, .subtitle-box {
     margin: 1.76rem auto;
-    height: 10rem;
     max-width: 120rem;
-    background-color: #0D122B;
+    height: 11rem;
+    background-color: var(--main-bg-color);
     color: white;
+    overflow: auto;
 }
 
 .title {
@@ -58,15 +64,21 @@ footer {
     margin: 0 auto 15px auto;
     padding: 1.9rem 20px;
     text-align: left;
+    display:flex;
+    flex-wrap:wrap;
+    height: max-content;
 }
 
 
-.left .category-name {
-  color: #1abc9c;
+.left .subtitle-box h2, .right .subtitle-box h2 {
   float: left;
   padding-right: 10px;
   width: 80%;
-  font-weight: bold;
+}
+
+.left .category-name {
+    color: #1abc9c;
+    font-weight: bold;
 }
 
 .left .line {
@@ -111,4 +123,11 @@ footer {
 
 .container {
     margin: 4rem auto;
+}
+
+.sticky {
+    position: fixed;
+    top: -20px;
+    width: 100%;
+    z-index: 100;
 }
