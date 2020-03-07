@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="../static/css/checkboxes.css">
     <link rel="shortcut icon" href="../static/favicon.ico">
 </head>
-<body style="background-color:#BFE2CA;">
+<body>
 {% extends "template.html" %}
 {% block content %}
 
     <main>
 
         <div class="container">
-            <div class="left col-lg-8 col-md-8  col-sm-12">
+            <div class="left col-lg-7 col-md-7  col-sm-12">
                 <div class="subtitle-box">
                     <h2 class="category-name">
                         {% for word in words %}
@@ -60,7 +60,7 @@
 
             <form method="POST" action="/">
                 <input name="category_id" value="{{ category_id }}" type="hidden" />
-                <div class="right col-lg-4 col-md-4  col-sm-12">
+                <div class="right col-lg-5 col-md-5  col-sm-12">
                     <div class="subtitle-box" >
                         <h2 class="overflow">
                             Categories
@@ -75,9 +75,9 @@
                             </label>
                         {% endfor %}
                     </div>
-                <input type="submit">
+                <input class="btn-green btn-submit"  type="submit">
 {#                    <div class="buttons">#}
-{#                        <button class="btn-green" type="submit" formmethod="post">Confirm</button>#}
+{#                        <button type="submit" formmethod="post"></button>#}
 {#                    </div>#}
                 </div>
             </form>
