@@ -25,6 +25,7 @@ body {
     color: var(--font-color);
     background-color: var(--bg-color);
     overflow: hidden;
+    white-space: nowrap;
 }
 
 main {
@@ -44,28 +45,10 @@ footer {
     overflow: auto;
 }
 
-.overflow {
-    position: relative;
-    /*background: var(--title-bg-color);*/
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.overflow::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1.8em;
-    height: 100%;
-}
-
 .title, .subtitle-box {
     margin: var(--general-space) auto;
-    max-width: 120rem;
     height: 11rem;
     background: var(--title-bg-color);
-    overflow: auto;
     display: flex;
     align-items: center;
 }
@@ -82,10 +65,14 @@ footer {
     height: max-content;
 }
 
+.subtitle-box h2, .title {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 .left, .right {
     margin-bottom: var(--general-space);
 }
-
 
 .left .subtitle-box h2, .right .subtitle-box h2 {
   float: left;
@@ -132,12 +119,4 @@ footer {
 
 .checkbox-list {
     color: var(--main-elements-color);
-    max-height: 36rem;
-}
-
-.sticky {
-    position: fixed;
-    top: -20px;
-    width: 100%;
-    z-index: 100;
 }

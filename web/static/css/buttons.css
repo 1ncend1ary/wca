@@ -1,28 +1,18 @@
-/*.buttons {*/
-/*    width: 245px;*/
-/*    margin: 50px auto;*/
-/*    padding: 10px 20px;*/
-/*    text-align: center;*/
-/*    background: white;*/
-/*    border: 1px solid rgba(0, 0, 0, 0.25);*/
-/*}*/
-
-
-    button {
-        margin: auto;
-        width: 200px;
-        height: 60px;
-        position: relative;
-        font-size: 22px;
-        text-align: center;
-        color: white;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        overflow: hidden;
-        text-shadow: 0 1px 2px var(--shadow-color);
-        transition: transform 0.4s ease-in-out;
-    }
+button {
+    margin: auto;
+    width: 200px;
+    height: 60px;
+    position: relative;
+    font-size: 22px;
+    text-align: center;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-shadow: 0 1px 2px var(--shadow-color);
+    transition: transform 0.4s ease-in-out;
+}
 
 @media (max-width: 420px) {
     button, .buttons {

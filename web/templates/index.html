@@ -1,92 +1,55 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Web Categories Annotator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/buttons.css">
-    <link rel="stylesheet" href="../static/css/template.css">
-    <link rel="stylesheet" href="../static/css/checkboxes.css">
-    <link rel="shortcut icon" href="../static/favicon.ico">
-</head>
-<body>
 {% extends "template.html" %}
 {% block content %}
 
-    <main>
+<main>
 
-        <div class="container">
-            <div class="left col-lg-7 col-md-7  col-sm-12">
-                <div class="subtitle-box">
-                    <h2 class="category-name">
-                        {% for word in words %}
-                        {{ word }}
-                        <br/>
-                        {% endfor %}
-                    </h2>
-                    <button class="btn-green btn-refresh" onClick="window.location.reload();">
-                        <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt=".">
-                    </button>
-                </div>
-                <div class="scrollable">
-                    {% for v in images %}
-{#                        <div class="line">#}
-{#                            {% for qq in v %}#}
-                                <div class="square-4 text-white" style="display: none">
-                                    <img class="image" src="{{ v }}" alt="Image"
-                                         style="display: none"
-                                         onload="this.style.display='initial'; this.parentNode.style.display='initial'"
-                                         onerror="this.style.display='none'; this.parentNode.style.display='none'"/>
-                                </div>
-{#                            {% endfor %}#}
-{#                        </div>#}
+    <div class="container">
+        <div class="left col-lg-7 col-md-7  col-sm-12">
+            <div class="subtitle-box">
+                <h2 class="category-name">
+                    {% for word in words %}
+                    {{ word }}
+                    <br/>
                     {% endfor %}
-
-                    {#                    <div class="line">#}
-                    {#                        <div class="square-4 text-white">#}
-                    {#                            <img class="image" src="{{ image }}" alt="Image"/>#}
-                    {#                        </div>#}
-                    {#                        <div class="square-4 text-white">#}
-                    {#                            <img class="image" alt="..."#}
-                    {#                                 src="https://farm1.static.flickr.com/72/178703477_81b2af55b9.jpg">#}
-                    {#                        </div>#}
-                    {#                        <div class="square-4 text-white">#}
-                    {#                            <img class="image" alt="..."#}
-                    {#                                 src="https://farm3.static.flickr.com/2260/2448903177_58e6bfd9f2.jpg">#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-                </div>
+                </h2>
+                <button class="btn-green btn-refresh" onClick="window.location.reload();">
+                    <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt=".">
+                </button>
             </div>
-
-            <form method="POST" action="/">
-                <input name="category_id" value="{{ category_id }}" type="hidden" />
-                <div class="right col-lg-5 col-md-5  col-sm-12">
-                    <div class="subtitle-box" >
-                        <h2 class="overflow">
-                            Categories
-                            <br/>
-                        </h2>
-                    </div>
-                    <div class="checkbox-list scrollable">
-                        {% for category in categories %}
-                            <label class="checkbox-container">{{ category }}
-                                <input name="checkbox" type="checkbox" value="{{ category }}">
-                                <span class="check-mark"></span>
-                            </label>
-                        {% endfor %}
-                    </div>
-                <input class="btn-green btn-submit"  type="submit">
-{#                    <div class="buttons">#}
-{#                        <button type="submit" formmethod="post"></button>#}
-{#                    </div>#}
+            <div class="scrollable">
+                {% for v in images %}
+                <div class="square-4 text-white" style="display: none">
+                    <img class="image" src="{{ v }}" alt="Image"
+                         style="display: none"
+                         onload="this.style.display='initial'; this.parentNode.style.display='initial'"
+                         onerror="this.style.display='none'; this.parentNode.style.display='none'"/>
                 </div>
-            </form>
+                {% endfor %}
+            </div>
         </div>
-    </main>
+
+        <form method="POST" action="/">
+            <input name="category_id" value="{{ category_id }}" type="hidden"/>
+            <div class="right col-lg-5 col-md-5  col-sm-12">
+                <div class="subtitle-box">
+                    <h2>
+                        Categories
+                        <br/>
+                    </h2>
+                </div>
+                <div class="checkbox-list scrollable">
+                    {% for category in categories %}
+                    <label class="checkbox-container">{{ category }}
+                        <input name="checkbox" type="checkbox" value="{{ category }}">
+                        <span class="check-mark"></span>
+                    </label>
+                    {% endfor %}
+                </div>
+                <input class="btn-green btn-submit" type="submit">
+            </div>
+        </form>
+    </div>
+</main>
 
 
 {% endblock %}
-
-
-</body>
-</html>
