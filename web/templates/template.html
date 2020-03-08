@@ -13,7 +13,7 @@
 <header>
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <h1 class="title">WEB CATEGORIES ANNOTATOR</h1>
+            <h1 class="title" id="fixedHeader">WEB CATEGORIES ANNOTATOR</h1>
         </div>
     </div>
 </header>
@@ -31,10 +31,24 @@
 <footer>
     <div class="text-center">
         <a class="git" href="https://github.com/1ncend1ary/wca">
-            Git Project
+            <img src="../static/images/GitHub-Mark-32px.png" alt="Git Project">
         </a>
     </div>
 </footer>
 
 </body>
 </html>
+
+<script type="text/javascript" src="../static/js/jquery.1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#fixedHeader").removeClass("default");
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 0) {
+                $("#fixedHeader").addClass("default").fadeIn('fast');
+            } else {
+                $("#fixedHeader").removeClass("default").fadeIn('fast');
+            };
+        });
+    });
+</script>
