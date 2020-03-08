@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="../static/css/buttons.css">
     <link rel="stylesheet" href="../static/css/template.css">
     <link rel="stylesheet" href="../static/css/checkboxes.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
     <link rel="shortcut icon" href="../static/favicon.ico">
+    <script type="text/javascript" src="../static/js/jquery.1.7.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-magnific-popup.min.js"></script>
 </head>
 <body>
 <header>
@@ -18,13 +21,13 @@
     </div>
 </header>
 {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endwith %}
 {% block content %}
 {% endblock %}
@@ -39,16 +42,16 @@
 </body>
 </html>
 
-<script type="text/javascript" src="../static/js/jquery.1.7.1.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#fixedHeader").removeClass("default");
-        $(window).scroll(function(){
+        $(window).scroll(function () {
             if ($(this).scrollTop() > 0) {
                 $("#fixedHeader").addClass("default").fadeIn('fast');
             } else {
                 $("#fixedHeader").removeClass("default").fadeIn('fast');
-            };
+            }
+            ;
         });
     });
 </script>

@@ -4,7 +4,7 @@
     --font-color: #FEFFFF;
     --main-elements-color: #17252A;
     --main-element-border-color: #0b1215;
-    --bg-grey-color: rgb(250,250,250);
+    --bg-grey-color: rgb(250, 250, 250);
     --shadow-color: rgba(0, 0, 0, 0.25);
     --title-bg-color: #3AAFA9;
     --title-border-color: #2B7A78;
@@ -61,7 +61,7 @@ footer {
     margin: 0 auto 15px auto;
     padding: var(--general-space) 20px;
     text-align: left;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     height: max-content;
 }
 
@@ -75,9 +75,9 @@ footer {
 }
 
 .left .subtitle-box h2, .right .subtitle-box h2 {
-  float: left;
-  padding-right: 10px;
-  width: 80%;
+    float: left;
+    padding-right: 10px;
+    width: 80%;
 }
 
 .left .category-name {
@@ -105,7 +105,7 @@ footer {
     padding-top: 100%;
 }
 
-.left .square-4 .image {
+.left .square-4 a .image {
     position: absolute;
     top: 0;
     left: 0;

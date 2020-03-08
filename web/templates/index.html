@@ -19,10 +19,12 @@
             <div class="scrollable">
                 {% for v in images %}
                 <div class="square-4 text-white" style="display: none">
-                    <img class="image" src="{{ v }}" alt="Image"
-                         style="display: none"
-                         onload="this.style.display='initial'; this.parentNode.style.display='initial'"
-                         onerror="this.style.display='none'; this.parentNode.style.display='none'"/>
+                    <a href="{{ v }}" class="imagePopup">
+                        <img class="image" src="{{ v }}" alt="Image"
+                             style="display: none"
+                             onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"
+                             onerror="this.style.display='none'; this.parentNode.parentNode.style.display='none'"/>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -51,5 +53,17 @@
     </div>
 </main>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".imagePopup").magnificPopup({
+            type: "image",
+            gallery: {
+                enabled: true
+            },
+            removalDelay: 100,
+            mainClass: 'mfp-fade'
+        });
+    });
+</script>
 
 {% endblock %}
