@@ -7,42 +7,51 @@
     <link rel="stylesheet" href="../static/css/buttons.css">
     <link rel="stylesheet" href="../static/css/template.css">
     <link rel="stylesheet" href="../static/css/checkboxes.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script type="text/javascript" src="../static/js/jquery.1.7.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-magnific-popup.min.js"></script>
 </head>
 <body>
 <header>
     <div class="container">
-        <h1 class="title overflow">Web Categories Annotator</h1>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <h1 class="title" id="fixedHeader">WEB CATEGORIES ANNOTATOR</h1>
+        </div>
     </div>
-
-{#    <strong>#}
-{#        <nav>#}
-{#            <ul class="menu">#}
-{#                <li><a href="{{ url_for('index') }}">Index</a></li>#}
-{#                <li><a href="{{ url_for('contacts') }}">Contacts</a></li>#}
-{#            </ul>#}
-{#        </nav>#}
-{#    </strong>#}
 </header>
-<hr>
 {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endwith %}
-
 {% block content %}
 {% endblock %}
-
-
 <footer>
     <div class="text-center">
-        <a class="git" href="https://github.com/1ncend1ary/wca">git project</a>
+        <a class="git" href="https://github.com/1ncend1ary/wca">
+            <img src="../static/images/GitHub-Mark-32px.png" alt="Git Project">
+        </a>
     </div>
 </footer>
 
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#fixedHeader").removeClass("default");
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 0) {
+                $("#fixedHeader").addClass("default").fadeIn('fast');
+            } else {
+                $("#fixedHeader").removeClass("default").fadeIn('fast');
+            }
+            ;
+        });
+    });
+</script>

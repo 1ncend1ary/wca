@@ -9,3 +9,4 @@ mongo-gui
 database
 *.log
 
+/web/trash-bin/
