@@ -1,6 +1,5 @@
 venv
 .idea
-.DS_store
 __pycache__
 secret.py
 secrets/*
@@ -8,5 +7,6 @@ secrets*
 mongo-gui
 database
 *.log
-
+web/model
+.DS_Store
 /web/trash-bin/
