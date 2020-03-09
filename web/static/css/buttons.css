@@ -57,12 +57,12 @@ button:active {
     width: 100%;
     margin: var(--general-space) auto;
     height: max-content;
-    text-align: left;
     font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
+    font-size: 2.5rem;
     color: inherit;
     padding: var(--general-space) 20px;
-    align-items: center;
+    text-align: left;
     border: none;
 }

@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 {% block content %}
 
-<main>
+<main style="border: none">
 
     <div class="container">
         <div class="left col-lg-7 col-md-7  col-sm-12">
@@ -34,7 +34,7 @@
             <input name="category_id" value="{{ category_id }}" type="hidden"/>
             <div class="right col-lg-5 col-md-5  col-sm-12">
                 <div class="subtitle-box">
-                    <h2>
+                    <h2 class="category-header">
                         Categories
                         <br/>
                     </h2>
@@ -42,28 +42,101 @@
                 <div class="checkbox-list scrollable">
                     {% for category in categories %}
                     <label class="checkbox-container">{{ category }}
-                        <input name="checkbox" type="checkbox" value="{{ category }}">
+                        <input class="chkbox" name="checkbox" type="checkbox" value="{{ category }}">
                         <span class="check-mark"></span>
                     </label>
                     {% endfor %}
                 </div>
-                <input class="btn-green btn-submit" type="submit">
+                <input id="mybtn" class="btn-green btn-submit" type="submit">
             </div>
         </form>
     </div>
 </main>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".imagePopup").magnificPopup({
-            type: "image",
-            gallery: {
-                enabled: true
-            },
-            removalDelay: 100,
-            mainClass: 'mfp-fade'
-        });
-    });
-</script>
+{#<script type="text/javascript">#}
+{#    $(document).ready(function () {#}
+{#        $(".imagePopup").magnificPopup({#}
+{#            type: "image",#}
+{#            gallery: {#}
+{#                enabled: true#}
+{#            },#}
+{#            removalDelay: 100,#}
+{#            mainClass: 'mfp-fade'#}
+{#        });#}
+{#    });#}
+{#</script>#}
+
+{#    <script type="text/javascript">#}
+{#        $(document).ready(function() {#}
+{#            $('.imagePopup').magnificPopup({#}
+                {#delegate: 'a',#}
+{#                type: 'image',#}
+{#                tLoading: 'Loading image #%curr%...',#}
+{#                mainClass: 'mfp-img-mobile',#}
+{#                gallery: {#}
+{#                    enabled: true,#}
+{#                    navigateByImgClick: true,#}
+{#                    preload: [0,1], // Will preload 0 - before current, and 1 after the current image#}
+{#                    closeOnBgClick: false#}
+{#                },#}
+{#                image: {#}
+{#                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',#}
+{#                    titleSrc: function(item) {#}
+{#                        return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+
+
+    <script>
+        $(document).ready(function() {
+            $('.imagePopup').magnificPopup({
+                type: 'image',
+                //closeOnBgClick: false,
+                gallery: {
+                    enabled: true,
+                    arrowMarkup: '<button style="display: none" title="%title%" type="button" class="mfp-arrow custom-mfp-arrow-%dir%"><i class="fa fa-angle-%dir% fa-4x"></i></button>'
+                },
+                zoom: {
+                    enabled: true, // By default it's false, so don't forget to enable it
+
+                    duration: 300, // duration of the effect, in milliseconds
+                    easing: 'ease-in-out', // CSS transition easing function
+
+                    // The "opener" function should return the element from which popup will be zoomed in
+                    // and to which popup will be scaled down
+                    // By defailt it looks for an image tag:
+                    opener: function (openerElement) {
+                        // openerElement is the element on which popup was initialized, in this case its <a> tag
+                        // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                        return openerElement.is('img') ? openerElement : openerElement.find('img');
+                    }
+                }
+            });
+        })
+    </script>
+
+    <script>
+        const button = document.getElementById("mybtn");
+        const checkboxes = document.getElementsByClassName("chkbox");
+        const main = "#8b9dc3";
+        const title = "#3b5998";
+
+        function onChangeListener() {
+            button.style.backgroundColor = main;
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    button.style.backgroundColor = title;
+                }
+            }
+        }
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            const checkbox = checkboxes[i];
+            checkbox.addEventListener("change", onChangeListener);
+        }
+    </script>
 
 {% endblock %}

@@ -1,18 +1,20 @@
 :root {
     --general-space: 1.7rem;
-    --bg-color: #fff;
+    --black: #000000;
     --font-color: #FEFFFF;
-    --main-elements-color: #17252A;
+    --main-elements-color: #8b9dc3;
     --main-element-border-color: #0b1215;
-    --bg-grey-color: rgb(250, 250, 250);
+    --bg-blue-color: #f7f7f7;
     --shadow-color: rgba(0, 0, 0, 0.25);
-    --title-bg-color: #3AAFA9;
-    --title-border-color: #2B7A78;
+    --title-bg-color: #3b5998;
+    /*#*/
+    --title-border-color: rgb(39, 79, 132);
+    /*--temp: rgb(192, 225, 203);*/
 }
 
 html {
     overflow: auto;
-    text-align: left;
+    /*text-align: left;*/
     font-style: normal;
     vertical-align: middle;
     letter-spacing: 0;
@@ -23,21 +25,30 @@ html {
 body {
     margin: 0;
     color: var(--font-color);
-    background-color: var(--bg-color);
+    background-color: var(--bg-blue-color);
     overflow: hidden;
     white-space: nowrap;
 }
 
+header {
+    background: var(--bg-blue-color);
+}
+
 main {
     padding: var(--general-space) 0;
-    background: var(--bg-grey-color);
+    background: var(--bg-blue-color);
     border-top: 1px solid var(--shadow-color);
 }
 
 footer {
     border-top: 1px solid var(--shadow-color);
+    background: var(--bg-blue-color);
     margin: auto;
     padding: 2rem;
+}
+
+.col-lg-12 {
+    height: max-content;
 }
 
 .scrollable {
@@ -47,22 +58,30 @@ footer {
 
 .title, .subtitle-box {
     margin: var(--general-space) auto;
-    height: 11rem;
+    /*height: 11rem;*/
     background: var(--title-bg-color);
     display: flex;
-    align-items: center;
+    /*margin: 0 auto;*/
+    /*align-items: center;*/
+}
+
+h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .title {
     padding: 3rem;
+    /*text-align: center;*/
 }
 
 .subtitle-box {
     margin: 0 auto 15px auto;
     padding: var(--general-space) 20px;
-    text-align: left;
+    /*text-align: left;*/
     flex-wrap: wrap;
     height: max-content;
+    /*align-content: center;*/
 }
 
 .subtitle-box h2, .title {
@@ -81,7 +100,8 @@ footer {
 }
 
 .left .category-name {
-    color: var(--main-elements-color);
+    color: var(--font-color);
+    /*text-align: center;*/
     font-weight: bold;
 }
 
@@ -118,15 +138,21 @@ footer {
 }
 
 .checkbox-list {
-    color: var(--main-elements-color);
+    color: var(--black);
 }
 
+/*.category-header {*/
+/*    text-align: center;*/
+/*    width: 100%;*/
+/*}*/
+
 #fixedHeader {
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     z-index: 9999;
     width: 100%;
+    /*text-align: center;*/
 }
 
 #fixedHeader.default {
