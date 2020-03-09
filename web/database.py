@@ -2,6 +2,8 @@ from pymongo import MongoClient
 from pprint import pprint
 import secret
 
+# from main import login
+
 client = MongoClient(secret.mongodb_url_local)
 db = client[secret.db_name]
 categories = db[secret.collection_name]
@@ -22,3 +24,17 @@ def write_interests(category_id, interests):
                           {'$set': {
                               'annotation': ', '.join(interests)
                           }}, upsert=False)
+
+
+user_db = client[secret.db_name_users]
+users = user_db[secret.collection_name_users]
+
+
+# @login.user_loader
+# def load_user(user_id):
+#     return users.find_one({'id': user_id})
+# return User.query.get(int(user_id))
+
+
+def find_user(username):
+    pass
