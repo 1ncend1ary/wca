@@ -10,3 +10,4 @@ database
 web/model
 .DS_Store
 /web/trash-bin/
+mongo-seed/users.csv
