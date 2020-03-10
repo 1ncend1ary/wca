@@ -1,13 +1,6 @@
 venv
 .idea
 __pycache__
-secret.py
-secrets/*
-secrets*
-mongo-gui
-database
+secret*
 *.log
 web/model
-.DS_Store
-/web/trash-bin/
-mongo_seed/users.csv
