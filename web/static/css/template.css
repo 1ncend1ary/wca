@@ -10,6 +10,7 @@
     --title-border-color: rgb(39, 79, 132);
 }
 
+/* Main elements style */
 html {
     overflow: auto;
     font-style: normal;
@@ -45,6 +46,14 @@ footer {
     padding: 2rem;
 }
 
+h2 {
+    margin: 0.5em 0;
+}
+
+.title {
+    padding: 3rem;
+}
+
 .col-lg-12 {
     height: max-content;
 }
@@ -58,14 +67,6 @@ footer {
     margin: var(--general-space) auto;
     background: var(--title-bg-color);
     display: flex;
-}
-
-h2 {
-    margin: 0.5em 0;
-}
-
-.title {
-    padding: 3rem;
 }
 
 .subtitle-box {
@@ -149,4 +150,31 @@ footer a {
     padding-left: 6rem;
     background: var(--title-bg-color);
     -webkit-box-shadow: 0 2px 2px var(--title-border-color);
+}
+
+/* Social container style */
+.social-container {
+    display: flex;
+    justify-content: center;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .social {
+        display: table-cell;
+        /* align-items: center; */
+        vertical-align: middle;
+        justify-content: center;
+        font-size: 4rem;
+    }
+}
+
+.social > div {
+    margin: 0 2rem;
 }

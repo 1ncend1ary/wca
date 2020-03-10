@@ -3,47 +3,27 @@
 <head>
     <meta charset="utf-8">
     <title>Web Categories Annotator</title>
+
+    {# Boostrap #}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    {# Local stylesheets #}
     <link rel="stylesheet" href="../static/css/buttons.css">
     <link rel="stylesheet" href="../static/css/template.css">
     <link rel="stylesheet" href="../static/css/checkboxes.css">
     <link rel="stylesheet" href="../static/css/magnific-popup.css">
-    <link rel="shortcut icon" href="../static/favicon.ico">
 
+    {# Fontawesome icons #}
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/brands.css" rel="stylesheet"/>
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" rel="stylesheet"/>
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" rel="stylesheet"/>
 
+    {# Favicon #}
+    <link rel="shortcut icon" href="../static/favicon.ico">
+
+    {# Magnific popup jquery plugin #}
     <script type="text/javascript" src="../static/js/jquery.1.7.1.min.js"></script>
     <script type="text/javascript" src="../static/js/jquery-magnific-popup.min.js"></script>
-
-    <style>
-        .social-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .social {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .social {
-                display: table-cell;
-                /* align-items: center; */
-                vertical-align: middle;
-                justify-content: center;
-                font-size: 4rem;
-            }
-        }
-
-        .social > div {
-            margin: 0 2rem;
-        }
-    </style>
 </head>
 <body>
 <header>
@@ -52,21 +32,19 @@
             <h1 class="title" id="fixedHeader">Web Categories Annotator</h1>
         </div>
     </div>
-    <div class="subtitle-box">
-        <p class="category-name">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul>
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-        </p>
-    </div>
 </header>
 
+<div class="subtitle-box">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
 
 {% block content %}
 {% endblock %}
@@ -74,8 +52,9 @@
     <div class="social-container">
         <div class='social'>
             <div>
-                <a id="Button1" onClick="reply_click(this.id)" target="_blank" href="https://github.com/1ncend1ary/wca"><i
-                        class="fab fa-github icon-fixed-width"></i></a><br>
+                <a id="Button1" onClick="reply_click(this.id)" target="_blank" href="https://github.com/1ncend1ary/wca">
+                    <i class="fab fa-github icon-fixed-width"></i>
+                </a><br>
             </div>
         </div>
     </div>
@@ -88,17 +67,3 @@
 </script>
 </body>
 </html>
-
-{#<script type="text/javascript">#}
-{#    $(document).ready(function () {#}
-{#        $("#fixedHeader").removeClass("default");#}
-{#        $(window).scroll(function () {#}
-{#            if ($(this).scrollTop() > 0) {#}
-{#                $("#fixedHeader").addClass("default").fadeIn('fast');#}
-{#            } else {#}
-{#                $("#fixedHeader").removeClass("default").fadeIn('fast');#}
-{#            }#}
-{#            ;#}
-{#        });#}
-{#    });#}
-{#</script>#}

@@ -1,122 +1,64 @@
 {% extends "template.html" %}
 {% block content %}
-
-<main style="border: none">
-
-    <div class="container">
-        <div class="left col-lg-7 col-md-7  col-sm-12">
-            <div class="subtitle-box">
-                <h2 class="category-name">
-                    {% for word in words %}
-                        {{ word }}
-                        <br/>
-                    {% endfor %}
-                </h2>
-                <button class="btn-green btn-refresh" onClick="window.location.reload();">
-                    <i class="fas fa-arrow-right"></i>
-                    {#                    <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt=".">#}
-                </button>
-            </div>
-            <div class="scrollable">
-                <img class="image" src="https://ik.imagekit.io/demo/img/image1.jpeg?tr=w-400,h-300"/>
-                <img class="image" src="https://ik.imagekit.io/demo/img/image2.jpeg?tr=w-400,h-300"/>
-                <img class="image" src="https://ik.imagekit.io/demo/img/image3.jpg?tr=w-400,h-300"/>
-                {% for v in images %}
-                    <div class="square-4 text-white" style="display: none">
-                        <a href="{{ v }}" class="imagePopup">
-                            {#                        <img class="image lazy" src="{{ v }}" alt="Image"#}
-                            {#                             style="display: none"#}
-                            {#                             onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"#}
-                            {#                             onerror="this.style.display='none'; this.parentNode.parentNode.style.display='none'"/>#}
-
-                            <img class="image lazy" data-src="{{ v }}" alt="Image"/>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <form method="POST" action="/">
-            <input name="category_id" value="{{ category_id }}" type="hidden"/>
-            <div class="right col-lg-5 col-md-5  col-sm-12">
+    <main>
+        <div class="container">
+            <div class="left col-lg-7 col-md-7 col-sm-12">
                 <div class="subtitle-box">
-                    <h2 class="category-header">
-                        Categories
-                        <br/>
+                    <h2 class="category-name">
+                        {% for word in words %}{{ word }}<br/>{% endfor %}
                     </h2>
+                    <button class="btn-green btn-refresh" onClick="window.location.reload();">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
-                <div class="checkbox-list scrollable">
-                    {% for category in categories %}
-                    <label class="checkbox-container">{{ category }}
-                        <input class="chkbox" name="checkbox" type="checkbox" value="{{ category }}">
-                        <span class="check-mark"></span>
-                    </label>
+                <div class="scrollable">
+                    {% for v in images %}
+                        <div class="square-4 text-white" style="display: none">
+                            <a href="{{ v }}" class="imagePopup">
+                                {#                        <img class="image lazy" src="{{ v }}" alt="Image"#}
+                                {#                             style="display: none"#}
+                                {#                             onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"#}
+                                {#                             onerror="this.style.display='none'; this.parentNode.parentNode.style.display='none'"/>#}
+                                <img class="image lazy" data-src="{{ v }}" alt="Image"/>
+                            </a>
+                        </div>
                     {% endfor %}
                 </div>
-                <input id="mybtn" class="btn-green btn-submit" type="submit">
             </div>
-        </form>
-    </div>
-</main>
 
-{#<script type="text/javascript">#}
-{#    $(document).ready(function () {#}
-{#        $(".imagePopup").magnificPopup({#}
-{#            type: "image",#}
-{#            gallery: {#}
-{#                enabled: true#}
-{#            },#}
-{#            removalDelay: 100,#}
-{#            mainClass: 'mfp-fade'#}
-{#        });#}
-{#    });#}
-{#</script>#}
-
-{#    <script type="text/javascript">#}
-{#        $(document).ready(function() {#}
-{#            $('.imagePopup').magnificPopup({#}
-                {#delegate: 'a',#}
-{#                type: 'image',#}
-{#                tLoading: 'Loading image #%curr%...',#}
-{#                mainClass: 'mfp-img-mobile',#}
-{#                gallery: {#}
-{#                    enabled: true,#}
-{#                    navigateByImgClick: true,#}
-{#                    preload: [0,1], // Will preload 0 - before current, and 1 after the current image#}
-{#                    closeOnBgClick: false#}
-{#                },#}
-{#                image: {#}
-{#                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',#}
-{#                    titleSrc: function(item) {#}
-{#                        return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';#}
-{#                    }#}
-{#                }#}
-{#            });#}
-{#        });#}
-{#    </script>#}
-
+            <form method="POST" action="/">
+                <input name="category_id" value="{{ category_id }}" type="hidden"/>
+                <div class="right col-lg-5 col-md-5 col-sm-12">
+                    <div class="subtitle-box">
+                        <h2 class="category-header">Categories<br/></h2>
+                    </div>
+                    <div class="checkbox-list scrollable">
+                        {% for category in categories %}
+                            <label class="checkbox-container">{{ category }}
+                                <input class="chkbox" name="checkbox" type="checkbox" value="{{ category }}">
+                                <span class="check-mark"></span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    <input id="mybtn" class="btn-green btn-submit" type="submit">
+                </div>
+            </form>
+        </div>
+    </main>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.imagePopup').magnificPopup({
                 type: 'image',
-                //closeOnBgClick: false,
                 gallery: {
                     enabled: true,
-                    arrowMarkup: '<button style="display: none" title="%title%" type="button" class="mfp-arrow custom-mfp-arrow-%dir%"><i class="fa fa-angle-%dir% fa-4x"></i></button>'
+                    arrowMarkup: '<button style="display: none"></button>'
                 },
                 zoom: {
-                    enabled: true, // By default it's false, so don't forget to enable it
-
-                    duration: 300, // duration of the effect, in milliseconds
-                    easing: 'ease-in-out', // CSS transition easing function
-
-                    // The "opener" function should return the element from which popup will be zoomed in
-                    // and to which popup will be scaled down
-                    // By defailt it looks for an image tag:
+                    enabled: true,
+                    duration: 300,
+                    easing: 'ease-in-out',
                     opener: function (openerElement) {
-                        // openerElement is the element on which popup was initialized, in this case its <a> tag
-                        // you don't need to add "opener" option if this code matches your needs, it's defailt one.
                         return openerElement.is('img') ? openerElement : openerElement.find('img');
                     }
                 }
@@ -151,7 +93,7 @@
 
             if ("IntersectionObserver" in window) {
                 lazyloadImages = document.querySelectorAll(".lazy");
-                const imageObserver = new IntersectionObserver(function (entries, observer) {
+                const imageObserver = new IntersectionObserver(function (entries) {
                     entries.forEach(function (entry) {
                         if (entry.isIntersecting) {
                             const image = entry.target;
@@ -173,9 +115,8 @@
                     if (lazyloadThrottleTimeout) {
                         clearTimeout(lazyloadThrottleTimeout);
                     }
-
                     lazyloadThrottleTimeout = setTimeout(function () {
-                        var scrollTop = window.pageYOffset;
+                        const scrollTop = window.pageYOffset;
                         lazyloadImages.forEach(function (img) {
                             if (img.offsetTop < (window.innerHeight + scrollTop)) {
                                 img.src = img.dataset.src;
@@ -189,7 +130,6 @@
                         }
                     }, 20);
                 }
-
                 document.addEventListener("scroll", lazyload);
                 window.addEventListener("resize", lazyload);
                 window.addEventListener("orientationChange", lazyload);
@@ -197,5 +137,4 @@
         })
 
     </script>
-
 {% endblock %}
