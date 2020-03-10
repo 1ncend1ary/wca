@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Flask application configuration module
+
+Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+"""
 import os
 
 
