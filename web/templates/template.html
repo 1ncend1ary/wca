@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="../static/css/magnific-popup.css">
     <link rel="shortcut icon" href="../static/favicon.ico">
 
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/brands.css" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/brands.css" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/solid.css" rel="stylesheet"/>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/fontawesome.css" rel="stylesheet"/>
 
     <script type="text/javascript" src="../static/js/jquery.1.7.1.min.js"></script>
     <script type="text/javascript" src="../static/js/jquery-magnific-popup.min.js"></script>
@@ -40,7 +40,7 @@
             }
         }
 
-        .social>div {
+        .social > div {
             margin: 0 2rem;
         }
     </style>
@@ -52,27 +52,40 @@
             <h1 class="title" id="fixedHeader">Web Categories Annotator</h1>
         </div>
     </div>
+    <div class="subtitle-box">
+        <p class="category-name">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </p>
+    </div>
 </header>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
+
+
 {% block content %}
 {% endblock %}
 <footer>
     <div class="social-container">
         <div class='social'>
             <div>
-                <a id="Button1" onClick="reply_click(this.id)" target="_blank" href="https://github.com/1ncend1ary/wca"><i class="fab fa-github icon-fixed-width"></i></a><br>
+                <a id="Button1" onClick="reply_click(this.id)" target="_blank" href="https://github.com/1ncend1ary/wca"><i
+                        class="fab fa-github icon-fixed-width"></i></a><br>
             </div>
         </div>
     </div>
 </footer>
+
+<script>
+    window.addEventListener('load', function () {
+        alert("It's loaded!")
+    })
+</script>
 </body>
 </html>
 

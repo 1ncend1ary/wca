@@ -36,20 +36,20 @@ button:active {
     box-shadow: inset 0 -2px var(--main-element-border-color);
 }
 
-.btn-green .icon {
-    width: 24px;
-    height: 24px;
+.btn-green .fa-arrow-right {
+    /*width: 24px;*/
+    /*height: 24px;*/
     transition: all 0.4s ease-in-out;
 }
 
-.btn-green:hover .icon {
+.btn-green:hover .fa-arrow-right {
     transform: rotate(360deg) scale(1.2);
 }
 
 .btn-refresh {
     width: 60px;
     height: 60px;
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
     margin: auto;
 }
 
