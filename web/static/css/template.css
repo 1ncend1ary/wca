@@ -8,7 +8,6 @@
     --shadow-color: rgba(0, 0, 0, 0.25);
     --title-bg-color: #3b5998;
     --title-border-color: rgb(39, 79, 132);
-    /*--temp: rgb(192, 225, 203);*/
 }
 
 html {
@@ -59,7 +58,6 @@ footer {
     margin: var(--general-space) auto;
     background: var(--title-bg-color);
     display: flex;
-    /*align-items: center;*/
 }
 
 h2 {
