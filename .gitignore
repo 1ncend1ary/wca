@@ -3,4 +3,4 @@ venv
 __pycache__
 secret*
 *.log
-web/model
+GoogleNews-vectors-negative300.bin
