@@ -1,40 +1,66 @@
+# -*- coding: utf-8 -*-
+"""
+MongoDB database handling module
+
+Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+"""
 from pymongo import MongoClient
-from pprint import pprint
 import secret
 
-# from main import login
-
 client = MongoClient(secret.mongodb_url_local)
-db = client[secret.db_name]
-categories = db[secret.collection_name]
 
 
-def fetch_new_entry():
-    results = list(categories.aggregate([{'$match': {"annotation": {"$exists": False}}},
-                                         {'$sample': {'size': 1}}]))
-    if len(results) != 1:
-        return None
-    else:
-        return results[0]
+class Categories:
+    """
+    MongoDB categories expecting to be annotated class
+    """
+    __db = client[secret.db_name]
+    __categories = __db[secret.collection_name]
+
+    def get_random(self):
+        """
+        Get a random annotation from the mongodb database
+
+        Fetches a single random entry without an existing annotation
+        """
+        category = list(self.__categories.aggregate([{'$match': {"annotation": {"$exists": False}}},
+                                                     {'$sample': {'size': 1}}]))
+
+        return None if len(category) != 1 else category[0]
+
+    def add_annotations(self, category_id, annotations):
+        """
+        Add a list of annotations to the category specified by category_id
+        """
+        self.__categories.update_one({'category_id': category_id},
+                                     {'$set': {
+                                         'annotation': ', '.join(annotations)
+                                     }}, upsert=False)
+
+    def __new__(cls):
+        """
+        Declare this class as singletone method
+
+        This method is initiated before __init__ and check whether an instance of this class already exists
+        """
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Categories, cls).__new__(cls)
+        return cls.instance
 
 
-def write_interests(category_id, interests):
-    # category = categories.find_one({'category_id': category_id})
-    categories.update_one({'category_id': category_id},
-                          {'$set': {
-                              'annotation': ', '.join(interests)
-                          }}, upsert=False)
+class Users:
+    """
+    MongoDB users password/login credentials database
+    """
+    __user_db = client[secret.db_name_users]
+    __users = __user_db[secret.collection_name_users]
 
+    def __new__(cls):
+        """
+        Declare this class as singletone method
 
-user_db = client[secret.db_name_users]
-users = user_db[secret.collection_name_users]
-
-
-# @login.user_loader
-# def load_user(user_id):
-#     return users.find_one({'id': user_id})
-# return User.query.get(int(user_id))
-
-
-def find_user(username):
-    pass
+        This method is initiated before __init__ and check whether an instance of this class already exists
+        """
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Users, cls).__new__(cls)
+        return cls.instance
