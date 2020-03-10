@@ -58,25 +58,25 @@ h2 {
     height: max-content;
 }
 
-.scrollable {
+.scrollable-area {
     max-height: 65rem;
     overflow: auto;
 }
 
-.title, .subtitle-box {
+.title, .subtitle {
     margin: var(--general-space) auto;
     background: var(--title-bg-color);
     display: flex;
 }
 
-.subtitle-box {
+.subtitle {
     margin: 0 auto 15px auto;
     padding: var(--general-space) 20px;
     flex-wrap: wrap;
     height: max-content;
 }
 
-.subtitle-box h2, .title {
+.subtitle h2, .title {
     overflow-x: auto;
     overflow-y: hidden;
 }
@@ -85,13 +85,13 @@ h2 {
     margin-bottom: var(--general-space);
 }
 
-.left .subtitle-box h2, .right .subtitle-box h2 {
+.left .subtitle h2, .right .subtitle h2 {
     float: left;
     padding-right: 10px;
     width: 80%;
 }
 
-.left .category-name {
+.left .categories-list {
     color: var(--font-color);
     font-weight: bold;
 }
@@ -103,20 +103,20 @@ h2 {
     width: 100%;
 }
 
-.left .square-4 {
+.left .imege__square {
     float: left;
     position: relative;
     min-height: 1px;
     width: 33.33333333%;
 }
 
-.left .square-4:before {
+.left .imege__square:before {
     content: "";
     display: block;
     padding-top: 100%;
 }
 
-.left .square-4 a .image {
+.left .imege__square a .image {
     position: absolute;
     top: 0;
     left: 0;

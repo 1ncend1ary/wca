@@ -3,18 +3,18 @@
     <main>
         <div class="container">
             <div class="left col-lg-7 col-md-7 col-sm-12">
-                <div class="subtitle-box">
-                    <h2 class="category-name">
+                <div class="subtitle">
+                    <h2 class="categories-list">
                         {% for word in words %}{{ word }}<br/>{% endfor %}
                     </h2>
                     <button class="btn-green btn-refresh" onClick="window.location.reload();">
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
-                <div class="scrollable">
+                <div class="scrollable-area">
                     {% for v in images %}
-                        <div class="square-4 text-white" style="display: none">
-                            <a href="{{ v }}" class="imagePopup">
+                        <div class="imege__square text-white" style="display: none">
+                            <a href="{{ v }}" class="image-popup">
                                 {#                        <img class="image lazy" src="{{ v }}" alt="Image"#}
                                 {#                             style="display: none"#}
                                 {#                             onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"#}
@@ -29,18 +29,18 @@
             <form method="POST" action="/">
                 <input name="category_id" value="{{ category_id }}" type="hidden"/>
                 <div class="right col-lg-5 col-md-5 col-sm-12">
-                    <div class="subtitle-box">
+                    <div class="subtitle">
                         <h2 class="category-header">Categories<br/></h2>
                     </div>
-                    <div class="checkbox-list scrollable">
+                    <div class="checkbox-list scrollable-area">
                         {% for category in categories %}
                             <label class="checkbox-container">{{ category }}
-                                <input class="chkbox" name="checkbox" type="checkbox" value="{{ category }}">
+                                <input class="checkbox" name="checkbox" type="checkbox" value="{{ category }}">
                                 <span class="check-mark"></span>
                             </label>
                         {% endfor %}
                     </div>
-                    <input id="mybtn" class="btn-green btn-submit" type="submit">
+                    <input id="mybutton" class="btn-green btn-submit" type="submit">
                 </div>
             </form>
         </div>
@@ -48,7 +48,7 @@
 
     <script>
         $(document).ready(function () {
-            $('.imagePopup').magnificPopup({
+            $('.image-popup').magnificPopup({
                 type: 'image',
                 gallery: {
                     enabled: true,
@@ -67,8 +67,8 @@
     </script>
 
     <script>
-        const button = document.getElementById("mybtn");
-        const checkboxes = document.getElementsByClassName("chkbox");
+        const button = document.getElementById("mybutton");
+        const checkboxes = document.getElementsByClassName("checkbox");
         const main = "#8b9dc3";
         const title = "#3b5998";
 
@@ -130,6 +130,7 @@
                         }
                     }, 20);
                 }
+
                 document.addEventListener("scroll", lazyload);
                 window.addEventListener("resize", lazyload);
                 window.addEventListener("orientationChange", lazyload);
