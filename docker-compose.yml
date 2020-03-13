@@ -13,8 +13,8 @@ services:
       - mongo
     # Requires secret.py file in application directory
     volumes:
-      - web:/app/web
-      - secrets/secret.py:/app/web/secret.py
+      - ./web:/app/web
+      - ./secrets/secret.py:/app/web/secret.py
     environment:
       FLASK_ENV: development
 
@@ -23,7 +23,7 @@ services:
     image: mongo:latest
     # Requires file with secret environment variables
     env_file:
-      - secrets/db.env
+      - ./secrets/db.env
     volumes:
       - mongodb_data:/data/db
     ports:
@@ -38,7 +38,7 @@ services:
       context: mongo_seed/
     # Requires file with secret environment variables
     env_file:
-      - secrets/db.env
+      - ./secrets/db.env
     links:
       - mongo
     restart: on-failure
@@ -48,7 +48,7 @@ services:
     image: mongo-express
     # Requires file with secret environment variables
     env_file:
-      - secrets/db_web.env
+      - ./secrets/db_web.env
     links:
       - mongo
     ports:
