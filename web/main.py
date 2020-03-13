@@ -47,20 +47,5 @@ def index():
                            category_id=category_id)
 
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('index'))
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#
-#         if not database.validate_user(username=form.username.data, password=form.password.data):
-#             flash('Invalid username or password')
-#             return redirect(url_for('login'))
-#         login_user(user, remember=form.remember_me.data)
-#         return redirect(url_for('index'))
-#     return render_template('login.html', title='Sign In', form=form)
-
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run()  # host="0.0.0.0", debug=True
