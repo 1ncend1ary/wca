@@ -1,76 +1,72 @@
+# -*- coding: utf-8 -*-
+"""
+Pre-trained word2vec model to compute distance between vectorised words
+
+Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+"""
 import gensim
 import numpy
 import math
 import sys
 
-path = 'model/GoogleNews-vectors-negative300.bin'
-print('Starting training', file=sys.stdout, flush=True)
-model = gensim.models.KeyedVectors.load_word2vec_format(path, binary=True, limit=100000)
-print('Finished training', file=sys.stdout, flush=True)
 
-
-def to_vector(word):
-    return model[word]
-
-
-def get_vector(word):
+class Vectoriser:
     """
-    word - a string (mb with spaces)
+    Words and vectors handling utility class
     """
-    diss = None
-    for cat in word.split():
-        try:
-            cur_model = model[cat]
-            if diss is None:
-                diss = cur_model
-            else:
-                diss = numpy.add(diss, cur_model)
-                # diss += cur_model
-        except KeyError:
-            print('Model not found for', cat, file=sys.stdout, flush=True)
-            return None
-    return diss
+    __path = 'model/GoogleNews-vectors-negative300.bin'
+    __limit = 100000
+    __isBinary = True
+    print('Starting training', file=sys.stdout, flush=True)
+    __model = gensim.models.KeyedVectors.load_word2vec_format(__path, binary=__isBinary, limit=__limit)
+    print('Finished training', file=sys.stdout, flush=True)
 
+    def __to_vec(self, word):
+        """
+        Convert a word to vector using a pre trained model
+        """
+        vector = None
+        for w in word.split():
+            try:
+                cur_model = self.__model[w]
+                if vector is None:
+                    vector = cur_model
+                else:
+                    vector = numpy.add(vector, cur_model)
+            except KeyError:
+                # Word not found in model
+                return None
+        return vector
 
-def sort_interests(category_name, interests):
-    """
-    category name - string (mb with spaces)
-    interest - list(string)  (every string mb with spaces)
-    """
-    diss = get_vector(category_name)
-    a = []
-    # for xy in interests:
-    #     a += [euclidian(diss, get_vector(xy))]
-    # print(a)
+    def sort(self, base, words):
+        """
+        Sort words based on euclidean distance from base word
+        """
+        base_vec = self.__to_vec(base)
 
-    qq = sorted(interests, key=lambda x: euclidian(diss, get_vector(x)))
-    print("Interests before sort:", interests, file=sys.stdout, flush=True)
-    print("Interests after sort:", qq, file=sys.stdout, flush=True)
-    return qq
+        sorted_words = sorted(words, key=lambda x: self.__euclidean(base_vec, self.__to_vec(x)))
+        print("Interests before sort:", words, file=sys.stdout, flush=True)
+        print("Interests after sort:", sorted_words, file=sys.stdout, flush=True)
+        return sorted_words
 
-    # diss2 = None
-    # for inter in interest:
-    #     try:
-    #         cur_model = model[cat]
-    #         if diss is None:
-    #             diss = cur_model
-    #         else:
-    #             diss += cur_model
-    #     except KeyError:
-    #         print('Model not found for', cat, file=sys.stdout, flush=True)
-    #         return -1
-    #
-    # return euclidian(diss, cat_name)
+    @staticmethod
+    def __pow2(value):
+        return math.pow(value, 2)
 
+    def __euclidean(self, vector1, vector2):
+        """
+        Get euclidean distance between two vectors
+        """
+        if vector1 is None or vector2 is None:
+            return float('inf')
+        return math.sqrt(sum(list((map(self.__pow2, map(lambda x, y: x - y, vector1, vector2))))))
 
-def pow2(x):
-    return math.pow(x, 2)
+    def __new__(cls):
+        """
+        Declare this class as singleton
 
-
-def euclidian(vector1, vector2):
-    if vector1 is None or vector2 is None:
-        return float('inf')
-    return math.sqrt(sum(list((map(pow2, map(lambda x, y: x - y, vector1, vector2))))))
-
-
-# print(sort_interests('spaceship', ['hello', 'wow', 'cow', 'microbe', 'nano', 'Britain']))
+        This method is initiated before __init__ and check whether an instance of this class already exists
+        """
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Vectoriser, cls).__new__(cls)
+        return cls.instance

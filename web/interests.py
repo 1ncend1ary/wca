@@ -1,56 +1,64 @@
+# -*- coding: utf-8 -*-
+"""
+Facebook API interaction module
+
+Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+"""
 import secret
-import requests
 import word2vec
-import sys
-import faster_than_requests as fast_requests
+import faster_than_requests as fr
 import json
 
-
-# import http.client
-
-# https://medium.com/@interestexplorerio/how-to-use-the-facebook-marketing-api-to-reveal-1000s-of-interests-that-are-hidden-in-the-facebook-e20ee5bdcd17
-# interests_connection = http.client.HTTPConnection('graph.facebook.com')
+vectoriser = word2vec.Vectoriser()
 
 
-def get_interests(category, quick=True):
-    url = 'https://graph.facebook.com/search?type=adinterest&q=[\'' + category + '\']&limit=10000&locale=en_US' \
-                                                                                 '&access_token=' + secret.token
-    # if quick:
-    data = []
-    try:
-        r = fast_requests.get2str(url)
-        r = json.loads(r)
-        data = r['data']
-        print('Data is.....:', data, file=sys.stdout, flush=True)
-    except Exception:
-        print("----------Got exception---------- with:", category, file=sys.stdout, flush=True)
-        # return []
-    # else:
-    #     data2 = []
-    #     try:
-    #         r = requests.get(url)
-    #         data2 = r.json()['data']
-    #         print('Data 22222 is.....:', data, file=sys.stdout, flush=True)
-    #     except requests.ConnectionError:
-    #         print("Got connection error", file=sys.stdout, flush=True)
-    #         # return []
-    #     print('Data equality 33333 is.....:', data == data2, file=sys.stdout, flush=True)
-    interests = [x['name'] for x in data]
-    return interests
+class FacebookRequest:
+    """
+    Facebook API requests handling class
+    """
+    __url = 'https://graph.facebook.com/search?type=adinterest&q=[\'{}\']&limit=10000&locale=en_US&access_token={}'
 
+    def __get_ad_interests(self, category):
+        """
+        Fetch advertisment interests via Facebook API method
 
-def parse_categories(category_names, include_sub=False, quick=True):
-    categories = []
-    for category_name in category_names:
-        interest = get_interests(category_name, quick)
-        if include_sub and len(interest) < 1:
-            print("Parsing split interests:", file=sys.stdout, flush=True)
-            for x in category_name.split():
-                categories += word2vec.sort_interests(category_name, get_interests(x, quick))
-        else:
-            print("Parsing 1 interest:", file=sys.stdout, flush=True)
-            categories += word2vec.sort_interests(category_name, interest)
-    return categories
+        Uses a fast requests library, faster_than_requests
+        """
+        url = self.__url.format(category, secret.token)
+        try:
+            r = fr.get2str(url)
+            r = json.loads(r)
+            json_data = r['data']
+        except Exception:
+            # any error caught during reading from the web, returning no ad_interests
+            return []
 
+        ad_interests = [jd['name'] for jd in json_data]
+        return ad_interests
 
-# print(parse_categories(['coupons', 'marketing coupons']))
+    def get_annotations(self, categories, recursive=False):
+        """
+        Get a list of annotations to a list of categories using Facebook API.
+
+        Optional keyword arguments:
+        recursive:  a boolean indicating whether categories should be looked up recursively if no annotations are found
+        """
+        annotations = []
+        for category in categories:
+            ad_interests = self.__get_ad_interests(category)
+            if recursive and len(ad_interests) < 1:
+                for c in category.split():
+                    annotations += vectoriser.sort(category, self.__get_ad_interests(c))
+            else:
+                annotations += vectoriser.sort(category, ad_interests)
+        return annotations
+
+    def __new__(cls):
+        """
+        Declare this class as singleton
+
+        This method is initiated before __init__ and check whether an instance of this class already exists
+        """
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(FacebookRequest, cls).__new__(cls)
+        return cls.instance

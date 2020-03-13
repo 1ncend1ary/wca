@@ -39,7 +39,7 @@ class Categories:
 
     def __new__(cls):
         """
-        Declare this class as singletone method
+        Declare this class as singleton
 
         This method is initiated before __init__ and check whether an instance of this class already exists
         """
@@ -57,7 +57,7 @@ class Users:
 
     def __new__(cls):
         """
-        Declare this class as singletone method
+        Declare this class as singleton
 
         This method is initiated before __init__ and check whether an instance of this class already exists
         """
