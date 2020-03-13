@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../static/js/jquery-magnific-popup.min.js"></script>
 </head>
 <body>
-<header>
+<header style="border-bottom: none">
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <h1 class="title" id="fixedHeader">Web Categories Annotator</h1>
@@ -34,16 +34,20 @@
     </div>
 </header>
 
-<div class="subtitle">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+<div class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="subtitle" style="margin: 0">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
 </div>
 
 {% block content %}

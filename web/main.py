@@ -38,7 +38,7 @@ def index():
     images = scraper.i_supply_images(category_id)
 
     if len(categories) == 0:
-        flash("You can get categories here:")
+        flash("You should get new categories")
     if len(images) == 0:
         flash('Get google images')
         images = [scraper.g_supply_images(cn) for cn in category_names]
