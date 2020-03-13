@@ -1,2 +1,6 @@
 venv
 .idea
+__pycache__
+secret*
+*.log
+GoogleNews-vectors-negative300.bin

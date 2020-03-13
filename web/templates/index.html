@@ -1,0 +1,141 @@
+{% extends "template.html" %}
+{% block content %}
+    <main>
+        <div class="container">
+            <div class="left col-lg-7 col-md-7 col-sm-12">
+                <div class="subtitle">
+                    <h2 class="categories-list">
+                        {% for word in words %}{{ word }}<br/>{% endfor %}
+                    </h2>
+                    <button class="btn-green btn-refresh" onClick="window.location.reload();">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="scrollable-area">
+                    {% for v in images %}
+                        <div class="imege__square text-white" style="display: none">
+                            <a href="{{ v }}" class="image-popup">
+                                <img class="image" src="{{ v }}" alt="Image"
+                                     style="display: none"
+                                     onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"
+                                     onerror="this.style.display='none'; this.parentNode.parentNode.style.display='none'"/>
+                                {#                                <img class="image lazy" data-src="{{ v }}" alt="Image"/>#}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <form method="POST" action="/">
+                <input name="category_id" value="{{ category_id }}" type="hidden"/>
+                <div class="right col-lg-5 col-md-5 col-sm-12">
+                    <div class="subtitle">
+                        <h2 class="category-header">Categories<br/></h2>
+                    </div>
+                    <div class="checkbox-list scrollable-area">
+                        {% for category in categories %}
+                            <label class="checkbox-container">{{ category }}
+                                <input class="checkbox" name="checkbox" type="checkbox" value="{{ category }}">
+                                <span class="check-mark"></span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    <input id="mybutton" class="btn-green btn-submit" type="submit">
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        $(document).ready(function () {
+            $('.image-popup').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true,
+                    arrowMarkup: '<button style="display: none"></button>'
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300,
+                    easing: 'ease-in-out',
+                    opener: function (openerElement) {
+                        return openerElement.is('img') ? openerElement : openerElement.find('img');
+                    }
+                }
+            });
+        })
+    </script>
+
+    <script>
+        const button = document.getElementById("mybutton");
+        const checkboxes = document.getElementsByClassName("checkbox");
+        const main = "#8b9dc3";
+        const title = "#3b5998";
+
+        function onChangeListener() {
+            button.style.backgroundColor = main;
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    button.style.backgroundColor = title;
+                }
+            }
+        }
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            const checkbox = checkboxes[i];
+            checkbox.addEventListener("change", onChangeListener);
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let lazyloadImages;
+
+            if ("IntersectionObserver" in window) {
+                lazyloadImages = document.querySelectorAll(".lazy");
+                const imageObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            const image = entry.target;
+                            image.src = image.dataset.src;
+                            image.classList.remove("lazy");
+                            imageObserver.unobserve(image);
+                        }
+                    });
+                });
+
+                lazyloadImages.forEach(function (image) {
+                    imageObserver.observe(image);
+                });
+            } else {
+                let lazyloadThrottleTimeout;
+                lazyloadImages = document.querySelectorAll(".lazy");
+
+                function lazyload() {
+                    if (lazyloadThrottleTimeout) {
+                        clearTimeout(lazyloadThrottleTimeout);
+                    }
+                    lazyloadThrottleTimeout = setTimeout(function () {
+                        const scrollTop = window.pageYOffset;
+                        lazyloadImages.forEach(function (img) {
+                            if (img.offsetTop < (window.innerHeight + scrollTop)) {
+                                img.src = img.dataset.src;
+                                img.classList.remove('lazy');
+                            }
+                        });
+                        if (lazyloadImages.length === 0) {
+                            document.removeEventListener("scroll", lazyload);
+                            window.removeEventListener("resize", lazyload);
+                            window.removeEventListener("orientationChange", lazyload);
+                        }
+                    }, 20);
+                }
+
+                document.addEventListener("scroll", lazyload);
+                window.addEventListener("resize", lazyload);
+                window.addEventListener("orientationChange", lazyload);
+            }
+        })
+
+    </script>
+{% endblock %}
