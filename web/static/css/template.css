@@ -1,72 +1,99 @@
+:root {
+    --general-space: 1.7rem;
+    --black: #262626;
+    --font-color: #FEFFFF;
+    --main-elements-color: #5A86E6;
+    --main-element-border-color: #324A80;
+    --bg-grey-color: #f7f7f7;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+    --title-bg-color: #3b5998;
+    --title-border-color: rgb(39, 79, 132);
+}
 
+/* Main elements style */
 html {
     overflow: auto;
+    font-style: normal;
+    vertical-align: middle;
+    letter-spacing: 0;
+    text-rendering: geometricPrecision;
+    font-family: 'Clarkson', Helvetica, sans-serif;
 }
 
 body {
-    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
-    white-space: nowrap;
+    margin: 0;
+    color: var(--font-color);
+    background-color: white;
     overflow: hidden;
+    white-space: nowrap;
+}
+
+header {
+    background: white;
+    border-bottom: 1px solid var(--shadow-color);
+}
+
+main {
+    padding: var(--general-space) 0;
+    background: whitesmoke;
+    border-top: 1px solid var(--shadow-color);
 }
 
 footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.25);
-    margin: 4rem auto auto;
+    border-top: 1px solid var(--shadow-color);
+    background: white;
+    margin: auto;
     padding: 2rem;
 }
 
-.scrollable {
-  max-height: 65rem;
-  overflow: auto;
-}
-
-.overflow {
-  white-space: nowrap;
-  overflow: hidden;
-  position: relative;
-  background: #0D122B;
-}
-
-.overflow::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 1.8em;
-  height: 100%;
-  background: -moz-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: -webkit-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: -o-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: -ms-linear-gradient(left, rgba(13, 18, 43, 0.2), #0D122B 100%);
-  background: linear-gradient(to right, rgba(13, 18, 43, 0.2), #0D122B 100%);
-}
-
-.title, .subtitle-box {
-    margin: 1.76rem auto;
-    height: 10rem;
-    max-width: 120rem;
-    background-color: #0D122B;
-    color: white;
+h2 {
+    margin: 0.5em 0;
 }
 
 .title {
     padding: 3rem;
 }
 
-.subtitle-box {
-    position: center;
-    margin: 0 auto 15px auto;
-    padding: 1.9rem 20px;
-    text-align: left;
+.col-lg-12 {
+    height: max-content;
 }
 
+.scrollable-area {
+    max-height: 65rem;
+    overflow: auto;
+}
 
-.left .category-name {
-  color: #1abc9c;
-  float: left;
-  padding-right: 10px;
-  width: 80%;
-  font-weight: bold;
+.title, .subtitle {
+    margin: var(--general-space) auto;
+    background: var(--title-bg-color);
+    display: flex;
+}
+
+.subtitle {
+    margin: 0 auto 15px auto;
+    padding: var(--general-space) 20px;
+    flex-wrap: wrap;
+    height: max-content;
+}
+
+.subtitle h2, .title {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.left, .right {
+    margin-bottom: var(--general-space);
+}
+
+.left .subtitle h2, .right .subtitle h2 {
+    float: left;
+    padding-right: 10px;
+    width: 80%;
+}
+
+.left .categories-list {
+    color: var(--font-color);
+    font-weight: bold;
 }
 
 .left .line {
@@ -76,39 +103,78 @@ footer {
     width: 100%;
 }
 
-.left .square-4 {
+.left .imege__square {
     float: left;
     position: relative;
     min-height: 1px;
     width: 33.33333333%;
 }
 
-.left .square-4:before {
+.left .imege__square:before {
     content: "";
     display: block;
     padding-top: 100%;
 }
 
-.left .square-4 .image {
+.left .imege__square a .image {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    padding: 1vw;
+    padding: 0.2rem;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.left .right {
-    margin-top: 115rem;
-}
-
 .checkbox-list {
-    max-height: 36rem;
+    color: var(--black);
 }
 
-.container {
-    margin: 4rem auto;
+footer a {
+    color: #3b5998;
+}
+
+#fixedHeader {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    width: 100%;
+}
+
+#fixedHeader.default {
+    position: fixed;
+    top: -20px;
+    padding-left: 6rem;
+    background: var(--title-bg-color);
+    -webkit-box-shadow: 0 2px 2px var(--title-border-color);
+}
+
+/* Social container style */
+.social-container {
+    display: flex;
+    justify-content: center;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .social {
+        display: table-cell;
+        /* align-items: center; */
+        vertical-align: middle;
+        justify-content: center;
+        font-size: 4rem;
+    }
+}
+
+.social > div {
+    margin: 0 2rem;
 }

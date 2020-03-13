@@ -2,3 +2,11 @@ flask
 redis
 pymongo
 dnspython
+requests
+flask_wtf
+flask-login
+gensim
+numpy==1.14.3
+scipy
+faster_than_requests
+bs4

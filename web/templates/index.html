@@ -1,147 +1,141 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Web Words Annotator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/buttons.css">
-    <link rel="stylesheet" href="../static/css/template.css">
-    <link rel="stylesheet" href="../static/css/checkboxes.css">
-</head>
-<body>
-<header>
-    <div class="container">
-        <h1 class="title overflow">Web Words Annotator</h1>
-    </div>
-</header>
+{% extends "template.html" %}
+{% block content %}
+    <main>
+        <div class="container">
+            <div class="left col-lg-7 col-md-7 col-sm-12">
+                <div class="subtitle">
+                    <h2 class="categories-list">
+                        {% for word in words %}{{ word }}<br/>{% endfor %}
+                    </h2>
+                    <button class="btn-green btn-refresh" onClick="window.location.reload();">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="scrollable-area">
+                    {% for v in images %}
+                        <div class="imege__square text-white" style="display: none">
+                            <a href="{{ v }}" class="image-popup">
+                                <img class="image" src="{{ v }}" alt="Image"
+                                     style="display: none"
+                                     onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"
+                                     onerror="this.style.display='none'; this.parentNode.parentNode.style.display='none'"/>
+                                {#                                <img class="image lazy" data-src="{{ v }}" alt="Image"/>#}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-<main>
-    <div class="container">
-        <div class="left col-lg-8 col-md-8  col-sm-12">
-            <div class="subtitle-box">
-                <h2 class="category-name overflow">Mango</h2>
-                <button class="btn-green btn-refresh" onClick="window.location.reload();">
-                    <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png" alt="reload">
-                </button>
-            </div>
-            <div class="scrollable">
-                <div class="line">
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..." src="http://farm1.static.flickr.com/10/14408672_de11545035.jpg">
+            <form method="POST" action="/">
+                <input name="category_id" value="{{ category_id }}" type="hidden"/>
+                <div class="right col-lg-5 col-md-5 col-sm-12">
+                    <div class="subtitle">
+                        <h2 class="category-header">Categories<br/></h2>
                     </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..." src="https://farm1.static.flickr.com/72/178703477_81b2af55b9.jpg">
+                    <div class="checkbox-list scrollable-area">
+                        {% for category in categories %}
+                            <label class="checkbox-container">{{ category }}
+                                <input class="checkbox" name="checkbox" type="checkbox" value="{{ category }}">
+                                <span class="check-mark"></span>
+                            </label>
+                        {% endfor %}
                     </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="https://farm3.static.flickr.com/2260/2448903177_58e6bfd9f2.jpg">
-                    </div>
+                    <input id="mybutton" class="btn-green btn-submit" type="submit">
                 </div>
-                <div class="line">
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="https://farm4.static.flickr.com/3022/2376756888_fca922a693.jpg">
-                    </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="http://farm4.static.flickr.com/3091/2284118423_5fc50d7753_o.jpg">
-                    </div>
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="http://www.fruitsandveggiesmorematters.org/wp-content/uploads/UserFiles/Image/cooking/good/nutrition/fvdb/mango.jpg">
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="square-4 text-white">
-                        <img class="image" alt="..."
-                             src="http://farm3.static.flickr.com/2166/2169138228_64c497340d.jpg">
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
-        <div class="right col-lg-4 col-md-4  col-sm-12">
-            <div class="subtitle-box">
-                <h2 class="overflow">Categories</h2>
-            </div>
-            <div class="checkbox-list scrollable">
-                <label class="checkbox-container">One
-                    <input type="checkbox" checked="checked">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Two
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Three
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-                <label class="checkbox-container">Four
-                    <input type="checkbox">
-                    <span class="check-mark"></span>
-                </label>
-            </div>
-            <div class="buttons">
-                <button class="btn-green">Confirm</button>
-            </div>
-        </div>
-    </div>
-</main>
+    </main>
 
-<footer>
-    <div class="text-center">
-        <a class="git" href="https://github.com/1ncend1ary/wca">git project</a>
-    </div>
-</footer>
+    <script>
+        $(document).ready(function () {
+            $('.image-popup').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true,
+                    arrowMarkup: '<button style="display: none"></button>'
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300,
+                    easing: 'ease-in-out',
+                    opener: function (openerElement) {
+                        return openerElement.is('img') ? openerElement : openerElement.find('img');
+                    }
+                }
+            });
+        })
+    </script>
 
+    <script>
+        const button = document.getElementById("mybutton");
+        const checkboxes = document.getElementsByClassName("checkbox");
+        const main = "#8b9dc3";
+        const title = "#3b5998";
 
-</body>
-</html>
+        function onChangeListener() {
+            button.style.backgroundColor = main;
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    button.style.backgroundColor = title;
+                }
+            }
+        }
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            const checkbox = checkboxes[i];
+            checkbox.addEventListener("change", onChangeListener);
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let lazyloadImages;
+
+            if ("IntersectionObserver" in window) {
+                lazyloadImages = document.querySelectorAll(".lazy");
+                const imageObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            const image = entry.target;
+                            image.src = image.dataset.src;
+                            image.classList.remove("lazy");
+                            imageObserver.unobserve(image);
+                        }
+                    });
+                });
+
+                lazyloadImages.forEach(function (image) {
+                    imageObserver.observe(image);
+                });
+            } else {
+                let lazyloadThrottleTimeout;
+                lazyloadImages = document.querySelectorAll(".lazy");
+
+                function lazyload() {
+                    if (lazyloadThrottleTimeout) {
+                        clearTimeout(lazyloadThrottleTimeout);
+                    }
+                    lazyloadThrottleTimeout = setTimeout(function () {
+                        const scrollTop = window.pageYOffset;
+                        lazyloadImages.forEach(function (img) {
+                            if (img.offsetTop < (window.innerHeight + scrollTop)) {
+                                img.src = img.dataset.src;
+                                img.classList.remove('lazy');
+                            }
+                        });
+                        if (lazyloadImages.length === 0) {
+                            document.removeEventListener("scroll", lazyload);
+                            window.removeEventListener("resize", lazyload);
+                            window.removeEventListener("orientationChange", lazyload);
+                        }
+                    }, 20);
+                }
+
+                document.addEventListener("scroll", lazyload);
+                window.addEventListener("resize", lazyload);
+                window.addEventListener("orientationChange", lazyload);
+            }
+        })
+
+    </script>
+{% endblock %}

@@ -1,10 +1,6 @@
 venv
 .idea
-.DS_store
 __pycache__
-secret.py
-secrets/*
-secrets*
-mongo-gui
-database
-
+secret*
+*.log
+GoogleNews-vectors-negative300.bin
