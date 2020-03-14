@@ -14,7 +14,7 @@ class Vectoriser:
     """
     Words and vectors handling utility class
     """
-    __path = 'model/GoogleNews-vectors-negative300.bin'
+    __path = 'model/GoogleNews-vectors-negative300.bin.gz'
     __limit = 100000
     __isBinary = True
     print('Starting training', file=sys.stdout, flush=True)
