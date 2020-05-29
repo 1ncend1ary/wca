@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>WWA contacts</title>
-</head>
-<body>
 {% extends "template.html" %}
 {% block content %}
-    <h1>Sign In</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="container">
+        <div class="left col-lg-7 col-md-7 col-sm-12">
+            <div class="subtitle">
+                <h2 class="categories-list">Sign In</h2>
+
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.username.label }}<br>
+                        {{ form.username(size=32) }}
+                    </p>
+                    <p>
+                        {{ form.password.label }}<br>
+                        {{ form.password(size=32) }}
+                    </p>
+                    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                    <p>{{ form.submit() }}</p>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-
-
-</body>
-</html>

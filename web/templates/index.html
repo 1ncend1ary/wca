@@ -1,23 +1,5 @@
 {% extends "template.html" %}
 {% block content %}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="container">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="subtitle">
-                        <div>
-                            {% if messages %}
-                                {% for message in messages %}
-                                    <p style="margin: 0">{{ message }}</p>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-    {% endwith %}
-
     <main>
         <div class="container">
             <div class="left col-lg-7 col-md-7 col-sm-12">

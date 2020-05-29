@@ -4,22 +4,62 @@ Flask application main module
 
 Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
 """
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, abort, jsonify
 import database
 import interests
 from config import Config
 import scraper
 import sys
 import ast
+from forms import LoginForm
+from flask_login import LoginManager, login_required, current_user, login_user, logout_user
+from models import User
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 db = database.Categories()
 requester = interests.FacebookRequest()
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.get(form.username.data)
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid login or password.')
+            return redirect(url_for('login'))
+        else:
+            flash('Logged in user {}'.format(form.username.data))
+            login_user(user, remember=form.remember_me.data)
+            return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
+@login_manager.unauthorized_handler
+def unauth_handler():
+    return render_template('401.html'), 401
+
+
 @app.route("/", methods=['GET', 'POST'])
+@login_required
 def index():
     """
     Flask index page render
@@ -41,10 +81,6 @@ def index():
 
             def convert_to_list(string, regex):
                 return ast.literal_eval(string)
-                # return [n.strip() for n in string]
-                # string = ''.join(c for c in string if c not in regex)
-                # string = string.split(',')
-                # return list(string)
 
             category_names = convert_to_list(category_names, '[]\'')
             if len(categories) > 0:  # todo remove crook
@@ -89,12 +125,6 @@ def index():
 
     return render_template("index.html", words=category_names, images=images[:20], categories=list(categories),
                            category_id=category_id)
-
-
-# @app.route("/add_category", methods=['GET', 'POST'])
-# def add_category():
-#     # if request.method == 'POST':
-#
 
 
 if __name__ == "__main__":

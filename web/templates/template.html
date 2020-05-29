@@ -36,15 +36,39 @@
     <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12">
 
-            <h1 class="title" id="fixedHeader">
+        <span class="title" id="fixedHeader">
+            <h1>
                 <i id="load-icon" class="fas fa-sync"></i>
-                <span>
-                    Web Categories Annotator
-                </span>
+                Web Categories Annotator
             </h1>
+            <span class="logout-button">
+                    {% if not current_user.is_anonymous %}
+                        <form action="{{ url_for('logout') }}">
+                            <input type="submit" value="Logout {{ current_user.username }}"/>
+                        </form>
+                    {% endif %}
+                </span>
+        </span>
         </div>
     </div>
 </header>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="container">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="subtitle">
+                    <div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p style="margin: 0">{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endwith %}
 
 {% block content %}
 {% endblock %}

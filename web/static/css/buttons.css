@@ -78,3 +78,12 @@ button:active {
         transform: rotate(359deg);
     }
 }
+
+.logout-button {
+    text-align: right;
+    margin: auto 0 auto auto;
+}
+
+.logout-button form input {
+    color: black;
+}
