@@ -30,10 +30,10 @@ class FacebookRequest:
             r = json.loads(r)
             json_data = r['data']
         except Exception:
-            # any error caught during reading from the web, returning no ad_interests
+            # any error caught while reading from the web, returning no ad_interests
             return []
 
-        ad_interests = [jd['name'] for jd in json_data]
+        ad_interests = [[jd['name'], jd['path']] for jd in json_data]
         return ad_interests
 
     def get_annotations(self, categories, recursive=False):
@@ -48,9 +48,10 @@ class FacebookRequest:
             ad_interests = self.__get_ad_interests(category)
             if recursive and len(ad_interests) < 1:
                 for c in category.split():
-                    annotations += vectoriser.sort(category, self.__get_ad_interests(c))
+                    annotations += vectoriser.sort_with_f(category, self.__get_ad_interests(c), lambda x: x[0])
             else:
-                annotations += vectoriser.sort(category, ad_interests)
+                annotations += vectoriser.sort_with_f(category, ad_interests, lambda x: x[0])
+                # todo error prone
         return annotations
 
     def __new__(cls):

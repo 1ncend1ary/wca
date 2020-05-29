@@ -49,6 +49,17 @@ class Vectoriser:
         print("Interests after sort:", sorted_words, file=sys.stdout, flush=True)
         return sorted_words
 
+    def sort_with_f(self, base, words, f):
+        """
+        Sort words based on euclidean distance from base word applying a function to every element
+        """
+        base_vec = self.__to_vec(base)
+
+        sorted_words = sorted(words, key=lambda x: self.__euclidean(base_vec, self.__to_vec(f(x))))
+        print("Interests before sort:", words, file=sys.stdout, flush=True)
+        print("Interests after sort:", sorted_words, file=sys.stdout, flush=True)
+        return sorted_words
+
     @staticmethod
     def __pow2(value):
         return math.pow(value, 2)

@@ -21,6 +21,10 @@
     width: 0;
 }
 
+.checkbox-container details p {
+    white-space: pre-line;
+}
+
 /* Create a custom checkbox */
 .check-mark {
     position: absolute;
