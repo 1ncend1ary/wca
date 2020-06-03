@@ -4,7 +4,7 @@ Get supplementary images from google search module
 
 Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
 """
-import faster_than_requests as fr
+# import faster_than_requests as fr
 import requests  # todo remove requests
 from bs4 import BeautifulSoup
 import secret
@@ -23,7 +23,10 @@ def g_supply_images(keyword):
     Get list of supplementary images from google search by keyword
     """
     url = _google_url.format(keyword)
-    bs = BeautifulSoup(fr.get2str(url), 'html.parser')
+
+    # print(fr.get2str(url), requests.get(url).text, file=sys.stdout, flush=True)
+
+    bs = BeautifulSoup(requests.get(url).text, 'html.parser')
 
     images = [i.get('src') for i in bs.find_all('img')[:10]]
     print(images[:5])
@@ -51,4 +54,7 @@ def i_supply_images(category_id):
     """
     url = _imagenet_url.format(category_id)
     # todo catch and format all exceptions
-    return fr.get2str(url).splitlines()
+    # print('FR:', fr.get2str(url)[:40], 'REQ:', requests.get(url).text[:40], file=sys.stdout, flush=True)
+    # print(fr.get2str(url) == requests.get(url).text, file=sys.stdout, flush=True)
+
+    return requests.get(url).text.splitlines()

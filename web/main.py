@@ -110,8 +110,6 @@ def index():
         categories[i][1] = '->\n'.join(category[1])
 
     images = scraper.i_supply_images(category_id)
-    # images = []
-    # categories = []
 
     # todo normal logging
     if len(categories) == 0:

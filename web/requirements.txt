@@ -8,6 +8,5 @@ flask-login
 gensim
 numpy==1.14.3
 scipy
-faster_than_requests
 pyopenssl
 bs4

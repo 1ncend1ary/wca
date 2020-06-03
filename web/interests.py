@@ -6,7 +6,8 @@ Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
 """
 import secret
 import word2vec
-import faster_than_requests as fr
+import requests
+# import faster_than_requests as fr
 import json
 
 vectoriser = word2vec.Vectoriser()
@@ -26,7 +27,8 @@ class FacebookRequest:
         """
         url = self.__url.format(category, secret.token)
         try:
-            r = fr.get2str(url)
+            # r = fr.get2str(url)
+            r = requests.get(url).text
             r = json.loads(r)
             json_data = r['data']
         except Exception:
