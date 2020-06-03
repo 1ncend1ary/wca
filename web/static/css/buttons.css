@@ -53,6 +53,7 @@ button:active {
 .btn-submit {
     width: 100%;
     margin: var(--general-space) auto;
+    min-height: auto;
     height: max-content;
     font-family: inherit;
     font-weight: 500;
