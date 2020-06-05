@@ -96,6 +96,8 @@ def index():
 
             print('Attempt 3[text, new categories]:', text, new_categories, file=sys.stdout, flush=True)
             images = list(images)
+            # todo add set
+            # todo add different category trees
             return render_template("index.html", words=category_names, images=images, categories=new_categories,
                                    category_id=category_id)
 
