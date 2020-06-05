@@ -1,0 +1,8 @@
+{% extends "template.html" %}
+{% block content %}
+    <div style="text-align: center">
+        <h2 style="color: black">Sorry, but you are not allowed to view this page!</h2>
+        <a href="{{ url_for('index') }}">Index</a>
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+{% endblock %}

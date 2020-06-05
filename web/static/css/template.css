@@ -69,6 +69,10 @@ h2 {
     display: flex;
 }
 
+.title h1 {
+    margin: auto 0 auto 0;
+}
+
 .subtitle {
     margin: 0 auto 15px auto;
     padding: var(--general-space) 20px;
@@ -177,4 +181,8 @@ footer a {
 
 .social > div {
     margin: 0 2rem;
+}
+
+.container .subtitle form input {
+    color: black;
 }

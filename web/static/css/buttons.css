@@ -63,3 +63,27 @@ button:active {
     text-align: left;
     border: none;
 }
+
+/* Add animated loading icon. */
+#load-icon {
+    margin-right: 2rem;
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.logout-button {
+    text-align: right;
+    margin: auto 0 auto auto;
+}
+
+.logout-button form input {
+    color: black;
+}

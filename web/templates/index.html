@@ -7,63 +7,120 @@
                     <h2 class="categories-list">
                         {% for word in words %}{{ word }}<br/>{% endfor %}
                     </h2>
-                    <button class="btn-green btn-refresh" onClick="window.location.reload();">
+                    <button class="btn-green btn-refresh" onClick="reloadAsGet();">
+                        {#                        #}
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
                 <div class="scrollable-area">
                     {% for v in images %}
                         <div class="imege__square text-white" style="display: none">
-                            <a href="{{ v }}" class="image-popup">
+                            {#                            <a href="{{ v }}" class="image-popup">#}
+
+                            <a data-fancybox="gallery" href="{{ v }}">
                                 <img class="image" src="{{ v }}" alt="Image"
                                      style="display: none"
                                      onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"
-                                     onerror="this.style.display='none'; this.parentNode.parentNode.style.display='none'"/>
+                                     onerror="removeElement(this);"/>
                                 {#                                <img class="image lazy" data-src="{{ v }}" alt="Image"/>#}
+
                             </a>
                         </div>
                     {% endfor %}
                 </div>
             </div>
 
-            <form method="POST" action="/">
-                <input name="category_id" value="{{ category_id }}" type="hidden"/>
-                <div class="right col-lg-5 col-md-5 col-sm-12">
-                    <div class="subtitle">
-                        <h2 class="category-header">Categories<br/></h2>
-                    </div>
+            <div class="right col-lg-5 col-md-5 col-sm-12">
+                <div class="subtitle">
+                    <h2 class="category-header">Categories<br/></h2>
+                </div>
+
+                <div class="subtitle">
+
+                    <form method="POST" action="/">
+                        <input type="hidden" name="type" value="add_category"/>
+
+                        <input name="words" value="{{ words }}" type="hidden"/>
+                        <input name="category_id" value="{{ category_id }}" type="hidden"/>
+                        <input name="images" value="{{ images }}" type="hidden"/>
+                        <input name="categories" value="{{ categories }}" type="hidden"/>
+
+                        <label>
+                            <input style="color: black" class="text" name="text" type="text" value=""
+                                   placeholder="Get new categories">
+                        </label>
+                        <input style="background: var(--main-elements-color); border: none" id="submit-add-category"
+                               type="submit" value="Get"/>
+                    </form>
+
+                </div>
+
+
+                <form method="POST" action="/">
+                    <input type="hidden" name="type" value="submit_categories"/>
+
+                    <input name="category_id" value="{{ category_id }}" type="hidden"/>
+
                     <div class="checkbox-list scrollable-area">
                         {% for category in categories %}
-                            <label class="checkbox-container">{{ category }}
-                                <input class="checkbox" name="checkbox" type="checkbox" value="{{ category }}">
+                            <label class="checkbox-container">
+                                <details>
+                                    <summary>{{ category[0] }}</summary>
+                                    <p>{{ category[1] }}</p>
+                                </details>
+
+                                <input class="checkbox" name="checkbox" type="checkbox" value="{{ category[0] }}">
                                 <span class="check-mark"></span>
                             </label>
                         {% endfor %}
                     </div>
                     <input id="mybutton" class="btn-green btn-submit" type="submit">
-                </div>
-            </form>
+                </form>
+
+            </div>
+
         </div>
     </main>
 
+    {#    <script>#}
+    {#        $(document).ready(function () {#}
+    {#            $('.image-popup').magnificPopup({#}
+    {#                type: 'image',#}
+    {#                gallery: {#}
+    {#                    enabled: true,#}
+    {#                    arrowMarkup: '<button style="display: none"></button>'#}
+    {#                },#}
+    {#                zoom: {#}
+    {#                    enabled: true,#}
+    {#                    duration: 300,#}
+    {#                    easing: 'ease-in-out',#}
+    {#                    opener: function (openerElement) {#}
+    {#                        return openerElement.is('img') ? openerElement : openerElement.find('img');#}
+    {#                    }#}
+    {#                }#}
+    {#            });#}
+    {#        })#}
+    {#    </script>#}
+
     <script>
-        $(document).ready(function () {
-            $('.image-popup').magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: true,
-                    arrowMarkup: '<button style="display: none"></button>'
-                },
-                zoom: {
-                    enabled: true,
-                    duration: 300,
-                    easing: 'ease-in-out',
-                    opener: function (openerElement) {
-                        return openerElement.is('img') ? openerElement : openerElement.find('img');
-                    }
-                }
-            });
-        })
+        function reloadAsGet() {
+            let loc = window.location;
+            window.location = loc.protocol + '//' + loc.host + loc.pathname + loc.search;
+        }
+    </script>
+
+    <script>
+        function removeElement(element) {
+            // Removes an element from the document
+            console.log('called!');
+            {#let element = document.getElementById(elementId);#}
+            {#console.log(element.parentNode);#}
+
+            let toDelete = element.parentNode.parentNode;
+
+            console.log(toDelete);
+            toDelete.parentNode.removeChild(toDelete);
+        }
     </script>
 
     <script>

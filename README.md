@@ -14,7 +14,7 @@ cd wca
 2. Unarchive with:
      - `tar -xvzf secrets.tar.gz`
      - or `source bin/unarchive.sh`
-3. Place pre-trained `GoogleNews-vectors-negative300.bin` model in `wca/web/model/`
+3. Place pre-trained `GoogleNews-vectors-negative300.bin` model in `wca/web/model/` (you can use the `download.sh` script)
 2. Ensure `Docker` daemon is running.
 3. `docker-compose up`
 6. In your browser: `localhost:8080` for web application, `localhost:19981` for database web-interface.
