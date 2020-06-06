@@ -186,3 +186,18 @@ footer a {
 .container .subtitle form input {
     color: black;
 }
+
+.login-form {
+    color: var(--black);
+    flex-direction: column;
+    align-self: stretch;
+    display: flex;
+}
+
+.login-label {
+    color: var(--font-color);
+}
+
+.login-field {
+    margin: 0 auto 1.5rem auto;
+}

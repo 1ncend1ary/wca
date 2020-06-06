@@ -81,10 +81,24 @@ button:active {
 }
 
 .logout-button {
+    margin: auto 0 0 auto;
+    min-height: auto;
+    height: max-content;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 2.5rem;
+    padding: 5px 20px;
+    border: none;
     text-align: right;
-    margin: auto 0 auto auto;
 }
 
 .logout-button form input {
-    color: black;
+    margin: 0 0.2rem;
+    color: var(--font-color);
+}
+
+.btn-container {
+    flex-direction: row;
+    display: flex;
 }

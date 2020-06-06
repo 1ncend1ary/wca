@@ -44,9 +44,21 @@
             </h1>
             <span class="logout-button">
                     {% if not current_user.is_anonymous %}
-                        <form action="{{ url_for('logout') }}">
-                            <input type="submit" value="Logout {{ current_user.username }}"/>
-                        </form>
+                        <div class="btn-container">
+                            <div class="logout-button">{{ current_user.username }}</div>
+                            <form action="{{ url_for('logout') }}">
+                                <input class="btn-green logout-button" type="submit" value="Logout"/>
+                            </form>
+                        </div>
+                    {% else %}
+                        <div class="btn-container">
+                            <form action="{{ url_for('index') }}">
+                                <input class="btn-green logout-button" type="submit" value="Home"/>
+                            </form>
+                            <form action="{{ url_for('login') }}">
+                                <input class="btn-green logout-button" type="submit" value="Log in"/>
+                            </form>
+                        </div>
                     {% endif %}
                 </span>
         </span>

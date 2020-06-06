@@ -1,24 +1,31 @@
 {% extends "template.html" %}
 {% block content %}
-    <div class="container">
-        <div class="left col-lg-7 col-md-7 col-sm-12">
-            <div class="subtitle">
-                <h2 class="categories-list">Sign In</h2>
+    <form class="container" action="" method="post">
+        <div class="left col-lg-4 col-md-3"></div>
+        <div class="left col-lg-4 col-md-6">
+            <div class="subtitle login-form scrollable-area">
 
-                <form action="" method="post">
-                    {{ form.hidden_tag() }}
-                    <p>
-                        {{ form.username.label }}<br>
-                        {{ form.username(size=32) }}
-                    </p>
-                    <p>
-                        {{ form.password.label }}<br>
-                        {{ form.password(size=32) }}
-                    </p>
-                    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-                    <p>{{ form.submit() }}</p>
-                </form>
+                {{ form.hidden_tag() }}
+
+                <p class="login-field">
+                    <span class="login-label">{{ form.username.label }}</span><br>
+                    {{ form.username(size=32) }}
+                </p>
+                <p class="login-field">
+                    <span class="login-label">{{ form.password.label }}</span><br>
+                    {{ form.password(size=32) }}
+                </p>
+
+                <p style="text-align: left" class="login-field">
+                    {{ form.remember_me() }}
+                    <span class="login-label">{{ form.remember_me.label }}</span>
+
+                </p>
             </div>
+                <button style="margin-top: 0" class="btn-green btn-submit" onclick="form.submit()">Sign in</button>
+
+
+            <div class="left col-lg-3 col-md-3 col-sm-12"></div>
         </div>
-    </div>
+    </form>
 {% endblock %}
