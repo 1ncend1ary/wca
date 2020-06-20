@@ -1,34 +1,19 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Get supplementary images from google search module
+Get supplementary images from search engines module.
 
-Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+__author__ = "Aleksei Seliverstov"
+__license__ = "MIT"
+__email__ = "alexseliverstov@yahoo.com"
 """
 import requests
 from bs4 import BeautifulSoup
-import web.secret as secret
-from web import logger
-
-_google_url = 'https://www.google.com/search?q={}&client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved' \
-              '=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982 '
+from web import logger, secret
 
 _imagenet_url = 'http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={}'
 
 _bing_url = "https://api.cognitive.microsoft.com/bing/v7.0/images/search"
-
-
-def g_supply_images(keyword):
-    """
-    WARNING: DEPRECATED
-
-    Get list of supplementary images from google search by keyword
-    """
-    url = _google_url.format(keyword)
-
-    bs = BeautifulSoup(requests.get(url).text, 'html.parser')
-
-    images = [i.get('src') for i in bs.find_all('img')[:10]]
-    return images[:5]
 
 
 def bing_suppy_images(keyword, number_of_images):

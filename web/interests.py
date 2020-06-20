@@ -1,12 +1,13 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Facebook API interaction module
+Facebook API interaction module.
 
-Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+__author__ = "Aleksei Seliverstov"
+__license__ = "MIT"
+__email__ = "alexseliverstov@yahoo.com"
 """
 from web import word2vec, secret, logger
-# import web.secret as secret
-# import web.word2vec as word2vec
 import requests
 import logging
 import json

@@ -1,19 +1,20 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Flask application main module
+Flask application main module.
 
-Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+__author__ = "Aleksei Seliverstov"
+__license__ = "MIT"
+__email__ = "alexseliverstov@yahoo.com"
 """
-import ast
-
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user, login_user, logout_user
 
-from web import app, login_manager, db, requester
+from web import app, login_manager, db, requester, logger
 import web.scraper as scraper
 from web.forms import LoginForm
 from web.database import User
-from web import logger
+import ast
 
 
 @login_manager.user_loader
@@ -101,32 +102,24 @@ def get_more_interests(req):
 
 
 def get_interests():
+    """
+    Get random category interests and render the 'index' template
+    """
     rnd = db.get_random()
     category_id = rnd.get('category_id')
     category_names = [x.strip() for x in rnd.get('category name').split(',')]
 
     categories = requester.get_annotations(category_names)
-
-    # for i, category in enumerate(categories):
-    #     categories[i][1] = '->\n'.join(category[1])
-
     images = scraper.supply_images(category_id, category_names)
 
-    num_of_images = 30
-
     if len(categories) == 0:
-        flash("No categories found, you should consider finding them yourself using the 'Get categories' field.")
-        logger.info("No categories found, you should consider finding them yourself using the 'Get categories' field.")
+        message = "No categories found, you should consider finding them yourself using the 'Get categories' field."
+        flash(message)
+        logger.info(message)
 
-    # if len(images) == 0:
-    #     flash('No images provided, queried Bing for related images.')
-    #     logging.info('No images provided, queried Bing for related images.')
-    #     for cn in category_names:
-    #         images += scraper.bing_suppy_images(cn)
-
+    num_of_images = 30
     return render_template("index.html", words=category_names, images=images[:num_of_images],
-                           categories=list(categories),
-                           category_id=category_id)
+                           categories=list(categories), category_id=category_id)
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -138,8 +131,8 @@ def index():
     logger.info('Requested index page.')
     if request.method == 'POST':
         return get_more_interests(request)
-
-    return get_interests()
+    else:
+        return get_interests()
 
 
 if __name__ == "__main__":

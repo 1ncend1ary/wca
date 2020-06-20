@@ -22,5 +22,6 @@ COPY . .
 #ENV FLASK_RUN_HOST 0.0.0.0
 #CMD ["flask", "run"]
 
+# Run command for production deployment
 WORKDIR /app
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "-w", "1", "web.main:app"]

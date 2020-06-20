@@ -1,8 +1,11 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Flask application forms configuration module
+Flask application forms configuration module.
 
-Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+__author__ = "Aleksei Seliverstov"
+__license__ = "MIT"
+__email__ = "alexseliverstov@yahoo.com"
 """
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField

@@ -1,12 +1,14 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-MongoDB database handling module
+MongoDB database handling module.
 
-Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+__author__ = "Aleksei Seliverstov"
+__license__ = "MIT"
+__email__ = "alexseliverstov@yahoo.com"
 """
-from web import logger
 from flask_login import UserMixin
-from web import secret, client
+from web import secret, client, logger
 
 
 class Categories:
@@ -56,15 +58,27 @@ class User(UserMixin):
     __users = __user_db[secret.collection_name_users]
 
     def __init__(self, username, password):
+        """
+        Initialize and instance with a username and a password.
+        """
         self.id = username
         self.username = username
         self.password = password
 
     def __repr__(self):
+        """
+        Return representation of self.
+        """
         return '<User {}>'.format(self.username)
 
     @classmethod
     def get(cls, user_id):
+        """
+        Get a User from a databse by user_id.
+
+        :param user_id: a string which is essentially the same as user login
+        :returns: a User or None if no users were found
+        """
         user_db_entry = cls.__users.find_one({'login': str(user_id)})
 
         if user_db_entry is None:
@@ -76,4 +90,9 @@ class User(UserMixin):
             return user
 
     def check_password(self, password):
+        """
+        Checks if the password argument is the same as the User's password
+
+        :param password: password which is to be checked
+        """
         return self.password == password

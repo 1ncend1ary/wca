@@ -1,8 +1,11 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Pre-trained word2vec model to compute distance between vectorised words
+Pre-trained word2vec model to compute distance between vectorised words.
 
-Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+__author__ = "Aleksei Seliverstov"
+__license__ = "MIT"
+__email__ = "alexseliverstov@yahoo.com"
 """
 import gensim
 import numpy
@@ -18,10 +21,8 @@ class Vectoriser:
     __path = 'web/model/GoogleNews-vectors-negative300.bin.gz'
     __limit = 100000
     __isBinary = True
-    # print('Starting training', file=sys.stdout, flush=True)
     logger.info('Starting training.')
     __model = gensim.models.KeyedVectors.load_word2vec_format(__path, binary=__isBinary, limit=__limit)
-    # print('Finished training', file=sys.stdout, flush=True)
     logger.info('Finished training.')
 
     def __to_vec(self, word):
@@ -48,11 +49,7 @@ class Vectoriser:
         :deprecated:
         """
         base_vec = self.__to_vec(base)
-
         sorted_words = sorted(words, key=lambda x: self.__euclidean(base_vec, self.__to_vec(x)))
-
-        # print("Interests before sort:", words, file=sys.stdout, flush=True)
-        # print("Interests after sort:", sorted_words, file=sys.stdout, flush=True)
         return sorted_words
 
     def sort_with_f(self, bases, words, f):
