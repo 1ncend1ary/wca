@@ -52,9 +52,9 @@
                         </div>
                     {% else %}
                         <div class="btn-container">
-                            <form action="{{ url_for('index') }}">
-                                <input class="btn-green logout-button" type="submit" value="Home"/>
-                            </form>
+{#                            <form action="{{ url_for('index') }}">#}
+{#                                <input class="btn-green logout-button" type="submit" value="Home"/>#}
+{#                            </form>#}
                             <form action="{{ url_for('login') }}">
                                 <input class="btn-green logout-button" type="submit" value="Log in"/>
                             </form>
@@ -89,7 +89,7 @@
     <div class="social-container">
         <div class='social'>
             <div>
-                <a id="Button1" onClick="reply_click(this.id)" target="_blank" href="https://github.com/1ncend1ary/wca">
+                <a id="Button1" target="_blank" href="https://github.com/1ncend1ary/wca">
                     <i class="fab fa-github icon-fixed-width"></i>
                 </a><br>
             </div>

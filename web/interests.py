@@ -1,13 +1,15 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Facebook API interaction module
+Facebook API interaction module.
 
-Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
+__author__ = "Aleksei Seliverstov"
+__license__ = "MIT"
+__email__ = "alexseliverstov@yahoo.com"
 """
-import secret
-import word2vec
+from web import word2vec, secret, logger
 import requests
-# import faster_than_requests as fr
+import logging
 import json
 
 vectoriser = word2vec.Vectoriser()
@@ -23,37 +25,35 @@ class FacebookRequest:
         """
         Fetch advertisment interests via Facebook API method
 
-        Uses a fast requests library, faster_than_requests
+        :returns: set of tuples containing interests
         """
         url = self.__url.format(category, secret.token)
         try:
-            # r = fr.get2str(url)
-            r = requests.get(url).text
-            r = json.loads(r)
+            r = json.loads(requests.get(url).text)
             json_data = r['data']
-        except Exception:
+            ad_interests = {(jd.get('name', ''), jd.get('topic', 'Unknown category')) for jd in json_data}
+            return ad_interests
+        except (requests.exceptions.RequestException, json.JSONDecodeError) as e:
             # any error caught while reading from the web, returning no ad_interests
-            return []
+            logging.exception(e)
+            return set()
 
-        ad_interests = [[jd['name'], jd['path']] for jd in json_data]
-        return ad_interests
-
-    def get_annotations(self, categories, recursive=False):
+    def get_annotations(self, categories):
         """
         Get a list of annotations to a list of categories using Facebook API.
 
-        Optional keyword arguments:
-        recursive:  a boolean indicating whether categories should be looked up recursively if no annotations are found
+        All annotations are unique.
+
+        :param categories: list of categories that should be annotated
+        :returns: list of annotations sorted by distance from categories
         """
-        annotations = []
+        ad_interests = set()
         for category in categories:
-            ad_interests = self.__get_ad_interests(category)
-            if recursive and len(ad_interests) < 1:
-                for c in category.split():
-                    annotations += vectoriser.sort_with_f(category, self.__get_ad_interests(c), lambda x: x[0])
-            else:
-                annotations += vectoriser.sort_with_f(category, ad_interests, lambda x: x[0])
-                # todo error prone
+            ad_interests.update(self.__get_ad_interests(category))
+
+        ad_interests = list(ad_interests)
+        annotations = vectoriser.sort_with_f(categories, ad_interests, lambda x: x[0])
+        logger.info('Got a list of annotations using Facebook.')
         return annotations
 
     def __new__(cls):
