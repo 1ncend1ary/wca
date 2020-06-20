@@ -18,11 +18,9 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Uncomment for development environment
-ENV FLASK_APP main.py
-ENV FLASK_RUN_HOST 0.0.0.0
-CMD ["flask", "run"]
+#ENV FLASK_APP main.py
+#ENV FLASK_RUN_HOST 0.0.0.0
+#CMD ["flask", "run"]
 
-
-
-#WORKDIR /app
-#CMD ["gunicorn", "-b", "0.0.0.0:5000", "-w", "1", "web.main:app"]
+WORKDIR /app
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "-w", "1", "web.main:app"]
