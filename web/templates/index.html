@@ -22,8 +22,6 @@
                                      style="display: none"
                                      onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"
                                      onerror="removeElement(this);"/>
-                                {#                                <img class="image lazy" data-src="{{ v }}" alt="Image"/>#}
-
                             </a>
                         </div>
                     {% endfor %}
@@ -82,25 +80,6 @@
         </div>
     </main>
 
-    {#    <script>#}
-    {#        $(document).ready(function () {#}
-    {#            $('.image-popup').magnificPopup({#}
-    {#                type: 'image',#}
-    {#                gallery: {#}
-    {#                    enabled: true,#}
-    {#                    arrowMarkup: '<button style="display: none"></button>'#}
-    {#                },#}
-    {#                zoom: {#}
-    {#                    enabled: true,#}
-    {#                    duration: 300,#}
-    {#                    easing: 'ease-in-out',#}
-    {#                    opener: function (openerElement) {#}
-    {#                        return openerElement.is('img') ? openerElement : openerElement.find('img');#}
-    {#                    }#}
-    {#                }#}
-    {#            });#}
-    {#        })#}
-    {#    </script>#}
 
     <script>
         function reloadAsGet() {
@@ -111,14 +90,7 @@
 
     <script>
         function removeElement(element) {
-            // Removes an element from the document
-            console.log('called!');
-            {#let element = document.getElementById(elementId);#}
-            {#console.log(element.parentNode);#}
-
             let toDelete = element.parentNode.parentNode;
-
-            console.log(toDelete);
             toDelete.parentNode.removeChild(toDelete);
         }
     </script>
