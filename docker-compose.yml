@@ -43,6 +43,7 @@ services:
       - mongo
     restart: on-failure
 
+  # -- Comment this if you don't need it (which is very probable) --
   # Set up database web interface image
   mongo_web:
     image: mongo-express
