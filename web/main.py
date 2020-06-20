@@ -12,7 +12,7 @@ from flask_login import login_required, current_user, login_user, logout_user
 from web import app, login_manager, db, requester
 import web.scraper as scraper
 from web.forms import LoginForm
-from web.models import User
+from web.database import User
 from web import logger
 
 

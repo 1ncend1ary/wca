@@ -4,11 +4,9 @@ MongoDB database handling module
 
 Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
 """
-from pymongo import MongoClient
-import web.secret as secret
 from web import logger
-
-client = MongoClient(secret.mongodb_url_local)
+from flask_login import UserMixin
+from web import secret, client
 
 
 class Categories:
@@ -49,19 +47,33 @@ class Categories:
             cls.instance = super(Categories, cls).__new__(cls)
         return cls.instance
 
-# class Users:
-#     """
-#     MongoDB users password/login credentials database
-#     """
-#     __user_db = client[secret.db_name_users]
-#     __users = __user_db[secret.collection_name_users]
-#
-#     def __new__(cls):
-#         """
-#         Declare this class as singleton
-#
-#         This method is initiated before __init__ and check whether an instance of this class already exists
-#         """
-#         if not hasattr(cls, 'instance'):
-#             cls.instance = super(Users, cls).__new__(cls)
-#         return cls.instance
+
+class User(UserMixin):
+    """
+    Flask user representation model class.
+    """
+    __user_db = client[secret.db_name_users]
+    __users = __user_db[secret.collection_name_users]
+
+    def __init__(self, username, password):
+        self.id = username
+        self.username = username
+        self.password = password
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
+
+    @classmethod
+    def get(cls, user_id):
+        user_db_entry = cls.__users.find_one({'login': str(user_id)})
+
+        if user_db_entry is None:
+            logger.info('Not found user by their login.')
+            return None
+        else:
+            user = User(user_db_entry['login'], user_db_entry['password'])
+            logger.info('Found user with id: {}.'.format(user_id))
+            return user
+
+    def check_password(self, password):
+        return self.password == password

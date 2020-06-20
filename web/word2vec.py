@@ -15,14 +15,14 @@ class Vectoriser:
     """
     Words and vectors handling utility class
     """
-    __path = 'model/GoogleNews-vectors-negative300.bin.gz'
+    __path = 'web/model/GoogleNews-vectors-negative300.bin.gz'
     __limit = 100000
     __isBinary = True
     # print('Starting training', file=sys.stdout, flush=True)
-    logger.error('Starting training')
+    logger.info('Starting training.')
     __model = gensim.models.KeyedVectors.load_word2vec_format(__path, binary=__isBinary, limit=__limit)
     # print('Finished training', file=sys.stdout, flush=True)
-    logger.error('Finished training')
+    logger.info('Finished training.')
 
     def __to_vec(self, word):
         """
