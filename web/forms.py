@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Flask application configuration module
+Flask application forms configuration module
 
 Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
 """
@@ -9,8 +9,10 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 
 
-# todo
 class LoginForm(FlaskForm):
+    """
+    Login form configurator class
+    """
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')

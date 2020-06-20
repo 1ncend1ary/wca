@@ -5,7 +5,7 @@ Flask models representation module
 Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
 """
 from flask_login import UserMixin
-import secret
+import web.secret as secret
 
 
 class User(UserMixin):

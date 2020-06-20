@@ -5,7 +5,8 @@ MongoDB database handling module
 Programmer: Aleksei Seliverstov <alexseliverstov@yahoo.com>
 """
 from pymongo import MongoClient
-import secret
+import web.secret as secret
+from web import logger
 
 client = MongoClient(secret.mongodb_url_local)
 
@@ -25,7 +26,7 @@ class Categories:
         """
         category = list(self.__categories.aggregate([{'$match': {"annotation": {"$exists": False}}},
                                                      {'$sample': {'size': 1}}]))
-
+        logger.info('Successfully retrieved an annotation from the database.')
         return None if len(category) != 1 else category[0]
 
     def add_annotations(self, category_id, annotations):
@@ -36,6 +37,7 @@ class Categories:
                                      {'$set': {
                                          'annotation': ', '.join(annotations)
                                      }}, upsert=False)
+        logger.info('Successfully written annotations to the database.')
 
     def __new__(cls):
         """
@@ -47,20 +49,19 @@ class Categories:
             cls.instance = super(Categories, cls).__new__(cls)
         return cls.instance
 
-
-class Users:
-    """
-    MongoDB users password/login credentials database
-    """
-    __user_db = client[secret.db_name_users]
-    __users = __user_db[secret.collection_name_users]
-
-    def __new__(cls):
-        """
-        Declare this class as singleton
-
-        This method is initiated before __init__ and check whether an instance of this class already exists
-        """
-        if not hasattr(cls, 'instance'):
-            cls.instance = super(Users, cls).__new__(cls)
-        return cls.instance
+# class Users:
+#     """
+#     MongoDB users password/login credentials database
+#     """
+#     __user_db = client[secret.db_name_users]
+#     __users = __user_db[secret.collection_name_users]
+#
+#     def __new__(cls):
+#         """
+#         Declare this class as singleton
+#
+#         This method is initiated before __init__ and check whether an instance of this class already exists
+#         """
+#         if not hasattr(cls, 'instance'):
+#             cls.instance = super(Users, cls).__new__(cls)
+#         return cls.instance
