@@ -10,3 +10,4 @@ numpy==1.14.3
 scipy
 pyopenssl
 bs4
+gunicorn
