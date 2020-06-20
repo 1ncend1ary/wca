@@ -20,6 +20,7 @@
                             <a data-fancybox="gallery" href="{{ v }}">
                                 <img class="image" src="{{ v }}" alt="Image"
                                      style="display: none"
+                                     loading="lazy"
                                      onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"
                                      onerror="removeElement(this);"/>
                             </a>
