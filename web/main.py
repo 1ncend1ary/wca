@@ -97,7 +97,8 @@ def get_more_interests(req):
 
         new_categories += categories
 
-        return render_template("index.html", words=category_names, images=list(images),
+        num_of_images = 30
+        return render_template("index.html", words=category_names, images=list(images)[:num_of_images],
                                categories=list(set(new_categories)), category_id=category_id)
 
 
