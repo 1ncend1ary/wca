@@ -10,19 +10,31 @@
                 <p class="login-field">
                     <span class="login-label">{{ form.username.label }}</span><br>
                     {{ form.username(size=32) }}
+                    <br/>
+                    {% for error in form.username.errors %}
+                        <span style="color: white;">[{{ error }}]</span>
+                    {% endfor %}
+
                 </p>
                 <p class="login-field">
                     <span class="login-label">{{ form.password.label }}</span><br>
                     {{ form.password(size=32) }}
+                    <br/>
+                    {% for error in form.password.errors %}
+                        <span style="color: white;">[{{ error }}]</span>
+                    {% endfor %}
+
                 </p>
 
-                <p style="text-align: left" class="login-field">
+                <p class="login-field">
                     {{ form.remember_me() }}
                     <span class="login-label">{{ form.remember_me.label }}</span>
 
                 </p>
             </div>
-                <button style="margin-top: 0" class="btn-green btn-submit" onclick="form.submit()">Sign in</button>
+            <button style="margin-top: 0; text-align: center;" class="btn-green btn-submit" onclick="form.submit()">Sign
+                in
+            </button>
 
 
             <div class="left col-lg-3 col-md-3 col-sm-12"></div>
