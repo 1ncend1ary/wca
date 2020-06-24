@@ -23,7 +23,7 @@ WORKDIR /app
 # Run command in production server environment
 CMD cp "$SECRET_WEB" ./web/secret.py && \
     cp "$SECRET_WORD2VEC" ./web/model/GoogleNews-vectors-negative300.bin.gz && \
-    gunicorn -b 0.0.0.0:5000 -w 1 web.main:app
+    gunicorn -b 0.0.0.0:5000 -w 2 --timeout 180 web.main:app
 
 
 # Uncomment for development environment
