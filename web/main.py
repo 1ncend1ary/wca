@@ -39,11 +39,11 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Invalid login or password.')
             logger.info('Invalid authentication credentials.')
-            return redirect(url_for('login'))
+            return render_template('login.html', title='Sign In', form=form)
         else:
             flash('Logged in user {}'.format(form.username.data))
             logger.info('Successfully logged in user {}.'.format(form.username.data))
-            login_user(user, remember=form.remember_me.data)
+            login_user(user)
             return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
@@ -104,7 +104,7 @@ def get_more_interests(req):
 
         num_of_images = 30
         return render_template("index.html", words=category_names, images=list(images)[:num_of_images],
-                               categories=list(set(new_categories)), category_id=category_id)
+                               categories=list(set(new_categories)), category_id=category_id, isfunny=False)
 
 
 def get_interests():
@@ -125,7 +125,7 @@ def get_interests():
 
     num_of_images = 30
     return render_template("index.html", words=category_names, images=images[:num_of_images],
-                           categories=list(categories), category_id=category_id)
+                           categories=list(categories), category_id=category_id, isfunny=False)
 
 
 @app.route("/", methods=['GET', 'POST'])
