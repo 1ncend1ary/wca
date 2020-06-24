@@ -1,0 +1,81 @@
+#### ---------------------------------------------
+#### ---- Web application images compose file ----:
+#### ---------------------------------------------
+
+version: '3.1'
+services:
+  # Set up image for web service.
+  web:
+    build:
+      web/
+    ports:
+      - "8080:5000"
+    depends_on:
+      - mongo_seed
+    environment:
+      FLASK_ENV: development
+      SECRET_WEB: /run/secrets/secret_web
+      SECRET_WORD2VEC: /run/secrets/word2vec
+    secrets:
+      - secret_web
+      - word2vec
+
+  # Set up database image
+  mongo:
+    image: mongo:latest
+    # Requires file with secret environment variables
+    env_file:
+      - ./secrets/db.env
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+    restart: on-failure
+
+  # Set up mongo seeder image --
+  # populates database with production data
+  # as well as user login/password data
+  mongo_seed:
+    build:
+      context: mongo_seed/
+    # Requires file with secret environment variables
+    env_file:
+      - ./secrets/db.env
+    depends_on:
+      - mongo
+    environment:
+      SECRET_DATA: /run/secrets/secret_data
+      SECRET_USERS: /run/secrets/secret_users
+    restart: on-failure
+    secrets:
+      - secret_data
+      - secret_users
+
+  # -- Uncomment this if you don't need it (which is unprobable) --
+  # Set up database web interface image
+#  mongo_web:
+#    image: mongo-express
+#    # Requires file with secret environment variables
+#    env_file:
+#      - ./secrets/db_web.env
+#    links:
+#      - mongo
+#    ports:
+#      - "19981:8081"
+#    restart: on-failure
+
+# Set up volume for mongodb data
+volumes:
+  mongodb_data:
+    driver: local
+
+# Set up services secrets
+secrets:
+  secret_data:
+    file: ./secrets/secret_data.csv
+  secret_users:
+    file: ./secrets/secret_users.csv
+  secret_web:
+    file: ./secrets/secret.py
+  word2vec:
+    file: ./secrets/GoogleNews-vectors-negative300.bin.gz
