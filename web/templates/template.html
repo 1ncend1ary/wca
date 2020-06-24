@@ -52,9 +52,6 @@
                         </div>
                     {% else %}
                         <div class="btn-container">
-{#                            <form action="{{ url_for('index') }}">#}
-{#                                <input class="btn-green logout-button" type="submit" value="Home"/>#}
-{#                            </form>#}
                             <form action="{{ url_for('login') }}">
                                 <input class="btn-green logout-button" type="submit" value="Log in"/>
                             </form>
@@ -83,8 +80,10 @@
     {% endif %}
 {% endwith %}
 
+<div id="content-wrap">
 {% block content %}
 {% endblock %}
+</div>
 <footer>
     <div class="social-container">
         <div class='social'>
@@ -99,7 +98,6 @@
 
 <script>
     window.addEventListener('load', function () {
-        {#alert("It's loaded!");#}
         document.getElementById('load-icon').style.display = 'none';
     })
 </script>
