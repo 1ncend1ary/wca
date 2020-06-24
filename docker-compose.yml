@@ -6,7 +6,7 @@ version: '3.1'
 services:
   # Set up image for web service.
   web:
-    image: wca_web:latest
+    image: wca_web_image:latest
     ports:
       - "8080:5000"
     depends_on:
@@ -35,7 +35,7 @@ services:
   # populates database with production data
   # as well as user login/password data
   mongo_seed:
-    image: wca_mongo_seed:latest
+    image: wca_mongo_seed_image:latest
     # Requires file with secret environment variables
     env_file:
       - ./secrets/db.env

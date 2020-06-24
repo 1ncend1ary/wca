@@ -18,9 +18,9 @@
                             <a data-fancybox="gallery" href="{{ v }}">
                                 <img class="image lazy"
                                         {% if isfunny %}
-                                     src="rick.jpeg"
+                                     src="{{ url_for('static', filename='rick.jpeg') }}"
                                         {% else %}
-                                     src="square.png"
+                                     src="{{ url_for('static', filename='square.jpeg') }}"
                                         {% endif %}
                                      data-src="{{ v }}" alt="Image"
                                      style="display: none"
