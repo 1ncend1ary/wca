@@ -97,7 +97,13 @@ def get_more_interests(req):
 
         new_categories += categories
 
-        return render_template("index.html", words=category_names, images=list(images),
+        if len(new_categories) == 0:
+            message = "No new categories found, you should consider changing your search term."
+            flash(message)
+            logger.info(message)
+
+        num_of_images = 30
+        return render_template("index.html", words=category_names, images=list(images)[:num_of_images],
                                categories=list(set(new_categories)), category_id=category_id, isfunny=False)
 
 
