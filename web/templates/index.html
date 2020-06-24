@@ -15,15 +15,18 @@
                 <div class="scrollable-area">
                     {% for v in images %}
                         <div class="imege__square text-white" style="display: none">
-                            {#                            <a href="{{ v }}" class="image-popup">#}
-
                             <a data-fancybox="gallery" href="{{ v }}">
-                                <img class="image" src="{{ v }}" alt="Image"
+                                <img class="image lazy"
+                                        {% if isfunny %}
+                                     src="rick.jpeg"
+                                        {% else %}
+                                     src="square.png"
+                                        {% endif %}
+                                     data-src="{{ v }}" alt="Image"
                                      style="display: none"
-                                     onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'"
-                                     onerror="removeElement(this);"/>
-                                {#                                <img class="image lazy" data-src="{{ v }}" alt="Image"/>#}
-
+                                     onload="this.style.display='initial'; this.parentNode.parentNode.style.display='initial'; console.log('loaded image');"
+                                     onerror="removeElement(this);"
+                                />
                             </a>
                         </div>
                     {% endfor %}
@@ -82,26 +85,6 @@
         </div>
     </main>
 
-    {#    <script>#}
-    {#        $(document).ready(function () {#}
-    {#            $('.image-popup').magnificPopup({#}
-    {#                type: 'image',#}
-    {#                gallery: {#}
-    {#                    enabled: true,#}
-    {#                    arrowMarkup: '<button style="display: none"></button>'#}
-    {#                },#}
-    {#                zoom: {#}
-    {#                    enabled: true,#}
-    {#                    duration: 300,#}
-    {#                    easing: 'ease-in-out',#}
-    {#                    opener: function (openerElement) {#}
-    {#                        return openerElement.is('img') ? openerElement : openerElement.find('img');#}
-    {#                    }#}
-    {#                }#}
-    {#            });#}
-    {#        })#}
-    {#    </script>#}
-
     <script>
         function reloadAsGet() {
             let loc = window.location;
@@ -111,14 +94,7 @@
 
     <script>
         function removeElement(element) {
-            // Removes an element from the document
-            console.log('called!');
-            {#let element = document.getElementById(elementId);#}
-            {#console.log(element.parentNode);#}
-
             let toDelete = element.parentNode.parentNode;
-
-            console.log(toDelete);
             toDelete.parentNode.removeChild(toDelete);
         }
     </script>
@@ -195,4 +171,9 @@
         })
 
     </script>
+    <script src="../static/js/yall.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", yall);
+    </script>
+
 {% endblock %}

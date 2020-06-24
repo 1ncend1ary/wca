@@ -12,6 +12,15 @@
 
 /* Main elements style */
 html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+html {
     overflow: auto;
     font-style: normal;
     vertical-align: middle;
@@ -200,4 +209,21 @@ footer a {
 
 .login-field {
     margin: 0 auto 1.5rem auto;
+}
+
+
+#content-wrap {
+    padding-bottom: 10vh;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+}
+
+footer a i {
+    height: 10vh;
+    cursor: pointer;
 }
