@@ -8,7 +8,6 @@ __license__ = "MIT"
 __email__ = "alexseliverstov@yahoo.com"
 """
 import requests
-from bs4 import BeautifulSoup
 from web import logger, secret
 
 _imagenet_url = 'http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={}'
@@ -22,12 +21,16 @@ def bing_suppy_images(keyword, number_of_images):
     """
     headers = {'Ocp-Apim-Subscription-Key': secret.subscription_key}
     params = {'q': keyword, 'license': 'public', 'imageType': 'photo'}
-
-    response = requests.get(_bing_url, headers=headers, params=params)
-    response.raise_for_status()
-    search_results = response.json()
-    logger.info('Got a list of images from Bing.')
-    return [img['thumbnailUrl'] for img in search_results['value'][:number_of_images]]
+    try:
+        response = requests.get(_bing_url, headers=headers, params=params)
+        response.raise_for_status()
+        search_results = response.json()
+        logger.info('Got a list of images from Bing.')
+        return [img['thumbnailUrl'] for img in search_results['value'][:number_of_images]]
+    except requests.exceptions.RequestException as e:
+        # any error caught while reading from the web, returning no images
+        logger.exception(e)
+        return []
 
 
 def i_supply_images(category_id):

@@ -9,7 +9,6 @@ __email__ = "alexseliverstov@yahoo.com"
 """
 from web import word2vec, secret, logger
 import requests
-import logging
 import json
 
 vectoriser = word2vec.Vectoriser()
@@ -35,7 +34,7 @@ class FacebookRequest:
             return ad_interests
         except (requests.exceptions.RequestException, json.JSONDecodeError) as e:
             # any error caught while reading from the web, returning no ad_interests
-            logging.exception(e)
+            logger.exception(e)
             return set()
 
     def get_annotations(self, categories):
