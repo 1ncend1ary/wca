@@ -6,7 +6,6 @@
 
 ### Quick start guide for deployment:
 1. Get all the `Docker` images [here](https://github.com/1ncend1ary/wca/packages).
-2. Rename these images using the `docker image tag [IMAGE ID] wca_web_image:latest` and `docker image tag [IMAGE ID] wca_mongo_seed_image:latest` commands.
 2. Create a directory and place the `docker-compose.yml` file there.
 3. Place the `secrets.tar.gz` archive there and extract it.
 4. Follow instructions in `README.txt`.
