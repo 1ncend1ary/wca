@@ -8,13 +8,13 @@
 1. Get all the `Docker` images [here](https://github.com/1ncend1ary/wca/packages).
 2. Create a directory and place the `docker-compose.yml` file there.
 3. Place the `secrets.tar.gz` archive there and extract it.
-4. Follow instructions in `README.txt`.
+4. Follow instructions in `secrets/README.txt`.
 5. After all of that, run `docker-compose up`.
 
 #### Note:
 In order to get `Docker` images, you need to login to docker on your local machine. The login process is described [here](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#authenticating-to-github-packages) 
 
-#### Quick start guide for development:
+### Quick start guide for development:
 
 ```sh
 git clone git@github.com:1ncend1ary/wca.git
